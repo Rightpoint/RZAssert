@@ -1,12 +1,3 @@
-#
-# Be sure to run `pod lib lint RZAssert.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# Any lines starting with a # are optional, but encouraged
-#
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = "RZAssert"
   s.version          = "0.1.0"
@@ -17,12 +8,11 @@ Pod::Spec.new do |s|
                        * Markdown format.
                        * Don't worry about the indent, we strip it!
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/RZAssert"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/Raizlabs/RZAssert"
   s.license          = 'MIT'
-  s.author           = { "mattThousand" => "matt.d.buckley1212@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/RZAssert.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { "Michael Gorbach" => "michael.gorbach@raizlabs.com" }
+  s.source           = { :git => "https://github.com/Raizlabs/RZAssert.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/raizlabs'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
@@ -36,3 +26,4 @@ Pod::Spec.new do |s|
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
+
