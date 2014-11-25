@@ -170,4 +170,73 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
 
 });
 
+describe(@"RZASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
+
+    it(@"handles nil correctly", ^{
+
+    });
+
+});
+
+describe(@"RZASSERT_TRUE_LOG works", ^{
+
+    it(@"handles nil correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_TRUE_LOG(nilString, nonEmptyString);
+        }));
+    });
+
+    it(@"handles non-nil values correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_TRUE_LOG(nonEmptyString, testMessage);
+        })).to.beTruthy;
+    });
+
+    it(@"logs a message", ^{
+        BOOL worked = NO;
+
+        @try {
+            RZASSERT_TRUE_LOG(NO, testMessage);
+        }
+        @catch (NSException *e) {
+            worked = ([e.description rangeOfString:testMessage].location != NSNotFound);
+        }
+
+        expect(worked).to.beTruthy;
+    });
+
+});
+
+describe(@"RZASSERT_EQUAL_OBJECT_POINTERS worked", ^{
+
+    it(@"handles nil correcty", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_EQUAL_OBJECT_POINTERS(nilString, nilString);
+        })).to.beFalsy;
+    });
+
+    it(@"handles non-nil values correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_EQUAL_OBJECT_POINTERS(nonEmptyString, nonEmptyString);
+        })).to.beTruthy;
+    });
+
+});
+
+describe(@"RZASSERT_EQUAL_OBJECTS", ^{
+
+    it(@"handles nil correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_EQUAL_OBJECTS(nilString, nilString);
+        })).to.beFalsy;
+    });
+
+    it(@"handles non-nil values correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_EQUAL_OBJECTS(nonEmptyString, nonEmptyString);
+        })).to.beFalsy;
+    });
+
+});
+
 SpecEnd
