@@ -39,7 +39,7 @@
     NSAssert(test, @"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self)
 
 #define RZASSERT_TRUE_WITH_MESSAGE_LOG(test, expression, message, ...) \
-    NSAssert(test, @"**** Unexpected Assertion **** %@ \nReason: %@: \nExpression:\"%@\", \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self)
+    NSAssert(test, @"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\", \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self)
 
 #define RZASSERT_TRUE_LOG(test, expression) \
     NSAssert(test, @"**** Unexpected Assertion **** \nExpression \"%@\" \nSelf: \"%@\"", expression, self);

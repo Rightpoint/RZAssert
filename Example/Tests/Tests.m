@@ -95,6 +95,7 @@ describe(@"RZASSERT_FALSE works", ^{
             RZASSERT_FALSE(!nilString);
         })).to.equal(YES);
     });
+
 });
 
 describe(@"RZASSERT_WITH_MESSAGE works", ^{
@@ -126,6 +127,7 @@ describe(@"RZASSERT_WITH_MESSAGE_LOG works", ^{
 
         expect(worked).to.equal(YES);
     });
+
 });
 
 describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
@@ -167,7 +169,35 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
 describe(@"RZASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
 
     it(@"handles nil correctly", ^{
+        BOOL worked = NO;
 
+        @try {
+            RZASSERT_TRUE_WITH_MESSAGE_LOG(nil, nonEmptyString, testMessage);
+        }
+        @catch (NSException *e) {
+            worked = ([e.description rangeOfString:testMessage].location != NSNotFound);
+        }
+
+        expect(worked).to.equal(YES);
+    });
+
+    it(@"handles NO correctly", ^{
+        BOOL worked = NO;
+
+        @try {
+            RZASSERT_TRUE_WITH_MESSAGE_LOG(NO, nonEmptyString, testMessage);
+        }
+        @catch (NSException *e) {
+            worked = ([e.description rangeOfString:testMessage].location != NSNotFound);
+        }
+
+        expect(worked).to.equal(YES);
+    });
+
+    it(@"handles YES correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_TRUE_WITH_MESSAGE_LOG(YES, nonEmptyString, testMessage);
+        })).to.equal(NO);
     });
 
 });
