@@ -30,6 +30,27 @@ static BOOL testAssertionWithBlock(AssertionBlock block)
     return worked;
 }
 
+static BOOL testAssertionWithBlockAndMessage(AssertionBlock block, char *message)
+{
+    NSCAssert(block != nil, @"assertion block must not be nil");
+
+    BOOL worked = NO;
+    @try {
+        block();
+    }
+    @catch (NSException *e) {
+        if ( message ) {
+            NSString* messageString = [NSString stringWithFormat:@"%s", message];
+            worked = ([e.description rangeOfString:messageString].location != NSNotFound);
+        }
+        else {
+            worked = YES;
+        }
+    }
+
+    return worked;
+}
+
 SpecBegin(InitialSpecs)
 
 describe(@"RZASSERT_NIL works", ^{
@@ -264,12 +285,6 @@ describe(@"RZASSERT_EQUAL_OBJECTS", ^{
 });
 
 describe(@"RZASSERT_EQUAL_STRINGS", ^{
-
-//    it(@"handles nil correcty", ^{
-//        expect(testAssertionWithBlock(^{
-//            RZASSERT_EQUAL_STRINGS(nilString, nilString);
-//        })).to.equal(YES);
-//    });
 
     it(@"handles equal strings correctly", ^{
         expect(testAssertionWithBlock(^{
