@@ -31,7 +31,7 @@ end
 #
 
 task :test do
-  sh("xctool -workspace '#{WORKSPACE_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator build test") rescue nil
+  sh("xcodebuild -workspace '#{WORKSPACE_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator -destination 'name=iPhone 6' build test") rescue nil
   exit $?.exitstatus
 end
 
