@@ -10,5 +10,6 @@ notifications:
     email:
         recipients:
          - michael.gorbach@raizlabs.com
+         - matt.buckley@raizlabs.com
         on_success: change
         on_failure: always
