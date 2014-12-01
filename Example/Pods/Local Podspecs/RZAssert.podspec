@@ -1,12 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = "RZAssert"
-  s.version          = "0.1.0"
-  s.summary          = "A short description of RZAssert."
+  s.version          = "1.0.0"
+  s.summary          = "Useful assertion macros from the fine folks at Raizlabs."
   s.description      = <<-DESC
-                       An optional longer description of RZAssert
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       Assertion macros for a range of conditions. Use RZAssert to confirm equality, class, and much more.
                        DESC
   s.homepage         = "https://github.com/Raizlabs/RZAssert"
   s.license          = 'MIT'
@@ -17,13 +14,6 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.0'
   s.requires_arc = true
 
-  s.source_files = 'Pod/Classes'
-  s.resource_bundles = {
-    'RZAssert' => ['Pod/Assets/*.png']
-  }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.source_files = 'Pod/Headers'
 end
 
