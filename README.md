@@ -1,7 +1,7 @@
 RZAssert
 ============
 
-[![Build Status](https://travis-ci.org/Raizlabs/RZVinyl.svg)](https://travis-ci.org/Raizlabs/RZassert)
+[![Build Status](https://travis-ci.org/Raizlabs/RZAssert.svg)](https://travis-ci.org/Raizlabs/RZAssert)
 
 Useful assertion macros from the fine folks at Raizlabs.
 
