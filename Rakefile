@@ -15,7 +15,7 @@ namespace :install do
   end
 
   task :pods do
-    sh("cd Example && pod install")
+    sh("cd Example && pod update && pod install && cd ../")
   end
   
 end
