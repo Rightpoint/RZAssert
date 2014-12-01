@@ -11,7 +11,6 @@ namespace :install do
   task :tools do
     # don't care if this fails on travis
     sh("brew update") rescue nil
-    sh("brew upgrade xctool") rescue nil
     sh("gem install cocoapods --no-rdoc --no-ri --no-document --quiet") rescue nil
   end
 
@@ -40,7 +39,7 @@ end
 #
 
 task :analyze do
-  sh("xctool -workspace '#{WORKSPACE_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator analyze -failOnWarnings") rescue nil
+  sh("xcodebuild -workspace '#{WORKSPACE_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator analyze") rescue nil
   exit $?.exitstatus
 end
 
@@ -57,7 +56,7 @@ namespace :clean do
   end
   
   task :example do
-    sh("xctool -project '#{PROJ_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator clean") rescue nil
+    sh("xcodebuild -project '#{PROJ_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator clean") rescue nil
   end
     
 end
@@ -74,19 +73,14 @@ end
 
 task :usage do
   puts "Usage:"
-  puts "  rake install       -- install all dependencies (xctool, cocoapods)"
+  puts "  rake install       -- install all dependencies (cocoapods)"
   puts "  rake install:pods  -- install cocoapods for tests/example"
   puts "  rake install:tools -- install build tool dependencies"
   puts "  rake test          -- run unit tests"
   puts "  rake clean         -- clean everything"
   puts "  rake clean:example -- clean the example project build artifacts"
   puts "  rake clean:pods    -- clean up cocoapods artifacts"
-  puts "  rake sync          -- synchronize project/directory hierarchy (dev only)"
   puts "  rake usage         -- print this message"
-end
-
-task :sync do
-  sync_project(PROJ_PATH, "")
 end
 
 #

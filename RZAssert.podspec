@@ -1,12 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = "RZAssert"
-  s.version          = "0.1.0"
+  s.version          = "1.0.0"
   s.summary          = "Useful assertion macros from the fine folks at Raizlabs."
   s.description      = <<-DESC
-                       An optional longer description of RZAssert
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       Assertion macros for a range of conditions. Use RZAssert to confirm equality, class, and much more.
                        DESC
   s.homepage         = "https://github.com/Raizlabs/RZAssert"
   s.license          = 'MIT'
