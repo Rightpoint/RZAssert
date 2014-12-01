@@ -7,6 +7,8 @@
 //
 
 #import "RZViewController.h"
+#import "RZViewControllerSubclass.h"
+#import <RZAssert.h>
 
 @interface RZViewController ()
 
@@ -17,13 +19,50 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+
+    [self assertTrue];
+
+    [self assertFalse];
+
+    [self assertNil];
+
+    [self assertNotNil:[[NSObject alloc] init]];
+
+    RZViewControllerSubclass *rzViewControllerSubclass = [[RZViewControllerSubclass alloc] init];
+
+    if ( rzViewControllerSubclass ) {
+        NSLog(@"Calling assertImplementedBySubclass on an instance of RZViewController raises an exception.");
+    }
 }
 
-- (void)didReceiveMemoryWarning
+- (void)assertTrue
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    RZASSERT_TRUE(YES);
+}
+
+- (void)assertFalse
+{
+    RZASSERT_FALSE(NO);
+}
+
+- (void)assertNil
+{
+    RZASSERT_NIL(nil);
+}
+
+- (void)assertNotNil:(NSObject *)obj
+{
+    RZASSERT_NOT_NIL(obj);
+}
+
+- (void)assertNonEmptyString:(NSString *)nonEmptyString
+{
+    RZASSERT_NONEMPTY_STRING(nonEmptyString);
+}
+
+- (void)assertImplementedBySubclass
+{
+    RZASSERT_SUBCLASSES_MUST_OVERRIDE
 }
 
 @end

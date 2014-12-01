@@ -23,6 +23,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		B5FC92B41A2D29B4002730EB /* RZViewControllerSubclass.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FC92B31A2D29B4002730EB /* RZViewControllerSubclass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,8 @@
 		81AE53BD1CA0F851BA4EB7A3 /* Pods-Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.release.xcconfig"; sourceTree = "<group>"; };
 		993869EA9C29F9E225FE2708 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		AB48556919530E3E721337E4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		B5FC92B21A2D29B4002730EB /* RZViewControllerSubclass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RZViewControllerSubclass.h; sourceTree = "<group>"; };
+		B5FC92B31A2D29B4002730EB /* RZViewControllerSubclass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RZViewControllerSubclass.m; sourceTree = "<group>"; };
 		C7CC0C965812DD4C127FE2D3 /* libPods-RZAssert.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RZAssert.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8686FF76183BBCF47FFD23F /* Pods-RZAssert.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RZAssert.release.xcconfig"; path = "Pods/Target Support Files/Pods-RZAssert/Pods-RZAssert.release.xcconfig"; sourceTree = "<group>"; };
 		D948E373D74994B2F1CC4275 /* Pods-RZAssert.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RZAssert.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RZAssert/Pods-RZAssert.debug.xcconfig"; sourceTree = "<group>"; };
@@ -146,6 +149,8 @@
 				6003F59F195388D20070C39A /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* RZViewController.h */,
 				6003F5A6195388D20070C39A /* RZViewController.m */,
+				B5FC92B21A2D29B4002730EB /* RZViewControllerSubclass.h */,
+				B5FC92B31A2D29B4002730EB /* RZViewControllerSubclass.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -364,6 +369,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5FC92B41A2D29B4002730EB /* RZViewControllerSubclass.m in Sources */,
 				6003F59E195388D20070C39A /* RZAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* RZViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
