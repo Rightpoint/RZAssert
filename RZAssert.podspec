@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "RZAssert"
-  s.version          = "1.0.0"
+  s.version          = "0.1.0"
   s.summary          = "Useful assertion macros from the fine folks at Raizlabs."
   s.description      = <<-DESC
                        Assertion macros for a range of conditions. Use RZAssert to confirm equality, class, and much more.
