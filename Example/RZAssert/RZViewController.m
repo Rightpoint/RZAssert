@@ -26,7 +26,7 @@
 
     [self assertNil];
 
-    [self assertNotNil:[[NSObject alloc] init]];
+    [self assertNotNil:self];
 
     RZViewControllerSubclass *rzViewControllerSubclass = [[RZViewControllerSubclass alloc] init];
 
@@ -59,7 +59,7 @@
 
 #pragma mark - RZASSERT_NOT_NIL
 
-- (void)assertNotNil:(NSObject *)obj
+- (void)assertNotNil:(id)obj
 {
     RZASSERT_NOT_NIL(obj);
 }
