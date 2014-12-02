@@ -3,7 +3,7 @@
 //  RZAssert
 //
 //  Created by Matthew Buckley on 12/1/14.
-//  Copyright (c) 2014 mattThousand. All rights reserved.
+//  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
 #import "RZViewControllerSubclass.h"

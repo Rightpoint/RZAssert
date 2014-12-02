@@ -2,8 +2,8 @@
 //  RZViewController.m
 //  RZAssert
 //
-//  Created by mattThousand on 11/24/2014.
-//  Copyright (c) 2014 mattThousand. All rights reserved.
+//  Created by Raizlabs on 11/24/2014.
+//  Copyright (c) 2014 Raizlabs. All rights reserved.
 //
 
 #import "RZViewController.h"
@@ -34,7 +34,6 @@
         NSLog(@"Calling assertImplementedBySubclass on an instance of RZViewController raises an exception.");
     }
 }
-
 
 #pragma mark - RZASSERT_TRUE
 
