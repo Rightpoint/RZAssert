@@ -88,13 +88,13 @@ describe(@"RZASSERT_TRUE works", ^{
         })).to.beTruthy();
     });
 
-    it(@"handles NO correctly" , ^{
+    it(@"handles NO correctly", ^{
         expect(testAssertionWithBlock(^{
             RZASSERT_TRUE(NO);
         })).to.beTruthy();
     });
 
-    it(@"handles YES correctly" , ^{
+    it(@"handles YES correctly", ^{
         expect(testAssertionWithBlock(^{
             RZASSERT_TRUE(YES);
         })).to.beFalsy();
@@ -114,13 +114,13 @@ describe(@"RZASSERT_FALSE works", ^{
         })).to.beTruthy();
     });
 
-    it(@"handles NO correctly" , ^{
+    it(@"handles NO correctly", ^{
         expect(testAssertionWithBlock(^{
             RZASSERT_FALSE(NO);
         })).to.beFalsy();
     });
 
-    it(@"handles YES correctly" , ^{
+    it(@"handles YES correctly", ^{
         expect(testAssertionWithBlock(^{
             RZASSERT_FALSE(YES);
         })).to.beTruthy();
