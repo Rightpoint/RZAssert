@@ -19,6 +19,3 @@ DerivedData
 .DS_Store
 .idea/
 
-# Pods
-Example/Pods
-Example/Podfile.lock
