@@ -35,7 +35,6 @@
     }
 }
 
-
 #pragma mark - RZASSERT_TRUE
 
 - (void)assertTrue
