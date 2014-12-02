@@ -247,7 +247,7 @@
 			attributes = {
 				CLASSPREFIX = RZ;
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = mattThousand;
+				ORGANIZATIONNAME = Raizlabs;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
 						SystemCapabilities = {
