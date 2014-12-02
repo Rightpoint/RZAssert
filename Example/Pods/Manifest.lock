@@ -1,6 +1,6 @@
 PODS:
   - Expecta (0.3.1)
-  - RZAssert (1.0.0)
+  - RZAssert (0.1.0)
   - Specta (0.3.0.beta1)
 
 DEPENDENCIES:
@@ -22,7 +22,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
-  RZAssert: 334a4d567712306591d495941bab51561dacb214
+  RZAssert: 811357bc06ba59be9a3f8545c2a6635e3d83b5f0
   Specta: 63e8ac8e07db6675c7096d37f77a266a1be4c02d
 
 COCOAPODS: 0.35.0
