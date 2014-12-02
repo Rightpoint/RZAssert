@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# OS X
-.DS_Store
-
 # Xcode
 build/
 *.pbxuser
@@ -12,14 +8,17 @@ build/
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
+*.xcworkspace
+!default.xcworkspace
 xcuserdata
-*.xccheckout
 profile
 *.moved-aside
 DerivedData
-*.hmap
-*.ipa
 
-# Bundler
-.bundle
+# OSX
+.DS_Store
+.idea/
 
+# Pods
+Example/Pods
+Example/Podfile.lock

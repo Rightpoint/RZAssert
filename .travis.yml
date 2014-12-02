@@ -1,10 +1,15 @@
-# references:
-# * http://www.objc.io/issue-6/travis-ci.html
-# * https://github.com/supermarin/xcpretty#usage
-
 language: objective-c
-# before_install: cd Example && pod install && cd -
-install:
-- gem install xcpretty --no-rdoc --no-ri --no-document --quiet
-script:
-- set -o pipefail && xcodebuild test -workspace Example/RZAssert.xcworkspace -scheme RZAssert -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c
+before_install: 
+    - export LANG=en_US.UTF-8
+    - rake install
+script: 
+    - rake clean:example
+    - rake test
+    - rake analyze
+notifications:
+    email:
+        recipients:
+         - michael.gorbach@raizlabs.com
+         - matt.buckley@raizlabs.com
+        on_success: change
+        on_failure: always
