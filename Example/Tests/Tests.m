@@ -8,10 +8,10 @@
 
 #import "RZAssert.h"
 
-static NSString* const nilString = nil;
-static NSString* const emptyString = @"";
-static NSString* const nonEmptyString = @"non-empty string";
-static NSString* const testMessage = @"test message";
+static NSString* const kNilString = nil;
+static NSString* const kEmptyString = @"";
+static NSString* const kNonEmptyString = @"non-empty string";
+static NSString* const kTestMessage = @"test message";
 
 typedef void (^AssertionBlock)(void);
 
@@ -31,17 +31,19 @@ static BOOL testAssertionWithBlock(AssertionBlock block)
 }
 
 
-SpecBegin(InitialSpecs)
+SpecBegin(RZAssert)
 
 describe(@"RZASSERT_NIL works", ^{
 
     it(@"handles nil correctly", ^{
-        RZASSERT_NIL(nilString);
+        expect(testAssertionWithBlock(^{
+            RZASSERT_NIL(kNilString);
+        })).to.beFalsy();
     });
 
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_NIL(nonEmptyString);
+            RZASSERT_NIL(kNonEmptyString);
         })).to.beTruthy();
     });
 
@@ -50,13 +52,14 @@ describe(@"RZASSERT_NIL works", ^{
 describe(@"RZASSERT_NOT_NIL works", ^{
 
     it(@"handles nil correctly", ^{
-        RZASSERT_NOT_NIL(nonEmptyString);
+        expect(testAssertionWithBlock(^{
+            RZASSERT_NOT_NIL(nil);
+        })).to.beTruthy();
     });
-
 
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_NOT_NIL(nonEmptyString);
+            RZASSERT_NOT_NIL(kNonEmptyString);
         })).to.beFalsy();
     });
 });
@@ -74,13 +77,27 @@ describe(@"RZASSERT_ALWAYS works", ^{
 describe(@"RZASSERT_TRUE works", ^{
 
     it(@"handles non-nil correctly", ^{
-        RZASSERT_TRUE(!nilString);
+        expect(testAssertionWithBlock(^{
+            RZASSERT_TRUE(!kNilString);
+        })).to.beFalsy();
     });
 
     it(@"handles nil values correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_TRUE(nilString);
+            RZASSERT_TRUE(kNilString);
         })).to.beTruthy();
+    });
+
+    it(@"handles NO correctly" , ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_TRUE(NO);
+        })).to.beTruthy();
+    });
+
+    it(@"handles YES correctly" , ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_TRUE(YES);
+        })).to.beFalsy();
     });
 
 });
@@ -88,12 +105,24 @@ describe(@"RZASSERT_TRUE works", ^{
 describe(@"RZASSERT_FALSE works", ^{
 
     it(@"handles nil correctly", ^{
-        RZASSERT_FALSE(nilString);
+        RZASSERT_FALSE(kNilString);
     });
 
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_FALSE(!nilString);
+            RZASSERT_FALSE(!kNilString);
+        })).to.beTruthy();
+    });
+
+    it(@"handles NO correctly" , ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_FALSE(NO);
+        })).to.beFalsy();
+    });
+
+    it(@"handles YES correctly" , ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_FALSE(YES);
         })).to.beTruthy();
     });
 
@@ -102,18 +131,13 @@ describe(@"RZASSERT_FALSE works", ^{
 describe(@"RZASSERT_WITH_MESSAGE works", ^{
 
     it(@"prints message on assert", ^{
-//        expect(testAssertionWithBlockAndMessage(^{
-//            RZASSERT_WITH_MESSAGE(nonEmptyString);
-//        }, [testMessage UTF8String])).to.beTruthy();
 
         BOOL worked = NO;
         @try {
-            RZASSERT_WITH_MESSAGE(nonEmptyString);
+            RZASSERT_WITH_MESSAGE(kNonEmptyString);
         }
         @catch (NSException *e) {
-            NSLog(@"YOOO");
-            NSLog(@"%@", e.description);
-            worked = ([e.description rangeOfString:nonEmptyString].location != NSNotFound);
+            worked = ([e.description rangeOfString:kNonEmptyString].location != NSNotFound);
         }
 
         expect(worked).to.beTruthy();
@@ -126,10 +150,10 @@ describe(@"RZASSERT_WITH_MESSAGE_LOG works", ^{
     it(@"prints a message on assert", ^{
         BOOL worked = NO;
         @try {
-            RZASSERT_WITH_MESSAGE_LOG(testMessage, nonEmptyString);
+            RZASSERT_WITH_MESSAGE_LOG(kTestMessage, kNonEmptyString);
         }
         @catch (NSException *e) {
-            worked = ([e.description rangeOfString:nonEmptyString].location != NSNotFound);
+            worked = ([e.description rangeOfString:kNonEmptyString].location != NSNotFound);
         }
         expect(worked).to.beTruthy();
     });
@@ -142,10 +166,10 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
         BOOL worked = NO;
 
         @try {
-            RZASSERT_TRUE_WITH_MESSAGE(nilString, testMessage);
+            RZASSERT_TRUE_WITH_MESSAGE(kNilString, kTestMessage);
         }
         @catch (NSException *e) {
-            worked = ([e.description rangeOfString:testMessage].location != NSNotFound);
+            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
         }
 
         expect(worked).to.beTruthy();
@@ -153,7 +177,7 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
 
     it(@"handles YES correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_TRUE_WITH_MESSAGE(YES, testMessage);
+            RZASSERT_TRUE_WITH_MESSAGE(YES, kTestMessage);
         })).to.beFalsy();
     });
 
@@ -161,10 +185,10 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
         BOOL worked = NO;
 
         @try {
-            RZASSERT_TRUE_WITH_MESSAGE(NO, testMessage);
+            RZASSERT_TRUE_WITH_MESSAGE(NO, kTestMessage);
         }
         @catch (NSException *e) {
-            worked = ([e.description rangeOfString:testMessage].location != NSNotFound);
+            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
         }
 
         expect(worked).to.beTruthy();
@@ -178,10 +202,10 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
         BOOL worked = NO;
 
         @try {
-            RZASSERT_TRUE_WITH_MESSAGE_LOG(nil, nonEmptyString, testMessage);
+            RZASSERT_TRUE_WITH_MESSAGE_LOG(nil, kNonEmptyString, kTestMessage);
         }
         @catch (NSException *e) {
-            worked = ([e.description rangeOfString:testMessage].location != NSNotFound);
+            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
         }
 
         expect(worked).to.beTruthy();
@@ -191,10 +215,10 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
         BOOL worked = NO;
 
         @try {
-            RZASSERT_TRUE_WITH_MESSAGE_LOG(NO, nonEmptyString, testMessage);
+            RZASSERT_TRUE_WITH_MESSAGE_LOG(NO, kNonEmptyString, kTestMessage);
         }
         @catch (NSException *e) {
-            worked = ([e.description rangeOfString:testMessage].location != NSNotFound);
+            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
         }
 
         expect(worked).to.beTruthy();
@@ -202,7 +226,7 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
 
     it(@"handles YES correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_TRUE_WITH_MESSAGE_LOG(YES, nonEmptyString, testMessage);
+            RZASSERT_TRUE_WITH_MESSAGE_LOG(YES, kNonEmptyString, kTestMessage);
         })).to.beFalsy();
     });
 
@@ -212,13 +236,13 @@ describe(@"RZASSERT_TRUE_LOG works", ^{
 
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_TRUE_LOG(nilString, nonEmptyString);
+            RZASSERT_TRUE_LOG(kNilString, kNonEmptyString);
         }));
     });
 
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_TRUE_LOG(nonEmptyString, testMessage);
+            RZASSERT_TRUE_LOG(kNonEmptyString, kTestMessage);
         })).to.beFalsy();
     });
 
@@ -226,10 +250,10 @@ describe(@"RZASSERT_TRUE_LOG works", ^{
         BOOL worked = NO;
 
         @try {
-            RZASSERT_TRUE_LOG(NO, testMessage);
+            RZASSERT_TRUE_LOG(NO, kTestMessage);
         }
         @catch (NSException *e) {
-            worked = ([e.description rangeOfString:testMessage].location != NSNotFound);
+            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
         }
 
         expect(worked).to.beTruthy();
@@ -241,13 +265,13 @@ describe(@"RZASSERT_EQUAL_OBJECT_POINTERS worked", ^{
 
     it(@"handles nil correcty", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_EQUAL_OBJECT_POINTERS(nilString, nilString);
+            RZASSERT_EQUAL_OBJECT_POINTERS(kNilString, kNilString);
         })).to.beFalsy();
     });
 
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_EQUAL_OBJECT_POINTERS(testMessage, nonEmptyString);
+            RZASSERT_EQUAL_OBJECT_POINTERS(kTestMessage, kNonEmptyString);
         })).to.beTruthy();
     });
 
@@ -257,14 +281,26 @@ describe(@"RZASSERT_EQUAL_OBJECTS", ^{
 
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_EQUAL_OBJECTS(nilString, nilString);
+            RZASSERT_EQUAL_OBJECTS(kNilString, kNilString);
         })).to.beFalsy();
     });
 
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_EQUAL_OBJECTS(nonEmptyString, nonEmptyString);
+            RZASSERT_EQUAL_OBJECTS(kNonEmptyString, kNonEmptyString);
         })).to.beFalsy();
+    });
+
+    it(@"handles non-pointer-equal objects correctly", ^{
+        expect(testAssertionWithBlock(^{
+            NSString *oneString = @"one";
+            NSString *twoString = @"on";
+            twoString = [twoString stringByAppendingString:@"e"];
+
+            expect(testAssertionWithBlock(^{
+                RZASSERT_EQUAL_OBJECTS(oneString, twoString);
+            })).to.beFalsy();
+        }));
     });
 
 });
@@ -273,13 +309,13 @@ describe(@"RZASSERT_EQUAL_STRINGS", ^{
 
     it(@"handles equal strings correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_EQUAL_STRINGS(nonEmptyString, nonEmptyString);
+            RZASSERT_EQUAL_STRINGS(kNonEmptyString, kNonEmptyString);
         })).to.beFalsy();
     });
 
     it(@"handles nonequal strings correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_EQUAL_STRINGS(nonEmptyString, testMessage);
+            RZASSERT_EQUAL_STRINGS(kNonEmptyString, kTestMessage);
         })).to.beTruthy();
     });
 
@@ -289,13 +325,13 @@ describe(@"RZASSERT_NONEMPTY_STRING works", ^{
 
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_NONEMPTY_STRING(nilString);
+            RZASSERT_NONEMPTY_STRING(kNilString);
         })).to.beTruthy();
     });
 
     it(@"handles nonempty string correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_NONEMPTY_STRING(nonEmptyString);
+            RZASSERT_NONEMPTY_STRING(kNonEmptyString);
         })).to.beFalsy();
     });
 
@@ -305,29 +341,35 @@ describe(@"RZASSERT_KINDOF works", ^{
 
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_KINDOF(nilString, [NSObject class]);
+            RZASSERT_KINDOF(kNilString, [NSObject class]);
         })).to.beTruthy();
     });
 
     it(@"handles non-nil value correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_KINDOF(nonEmptyString, [NSString class]);
+            RZASSERT_KINDOF(kNonEmptyString, [NSString class]);
         })).to.beFalsy();
+    });
+
+    it(@"handles non-matching class correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_KINDOF(kNonEmptyString, [NSNumber class]);
+        })).to.beTruthy();;
     });
 
 });
 
-describe(@"RZCASSERT_KINDOF_OR_NIL works", ^{
+describe(@"RZCASSERT_KINDOF works", ^{
 
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZCASSERT_KINDOF(nilString, [NSObject class]);
+            RZCASSERT_KINDOF(kNilString, [NSObject class]);
         })).to.beTruthy();
     });
 
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZCASSERT_KINDOF(nonEmptyString, [NSString class]);
+            RZCASSERT_KINDOF(kNonEmptyString, [NSString class]);
         }));
     });
 
@@ -337,19 +379,19 @@ describe(@"RZASSERT_KINDOF_OR_NIL works", ^{
 
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_KINDOF_OR_NIL(nilString, [NSObject class]);
+            RZASSERT_KINDOF_OR_NIL(kNilString, [NSObject class]);
         })).to.beFalsy();
     });
 
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_KINDOF_OR_NIL(nonEmptyString, [NSString class]);
+            RZASSERT_KINDOF_OR_NIL(kNonEmptyString, [NSString class]);
         })).to.beFalsy();
     });
 
     it(@"handles non-matching class correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_KINDOF_OR_NIL(nonEmptyString, [NSNumber class]);
+            RZASSERT_KINDOF_OR_NIL(kNonEmptyString, [NSNumber class]);
         })).to.beTruthy();
     });
 
@@ -357,15 +399,21 @@ describe(@"RZASSERT_KINDOF_OR_NIL works", ^{
 
 describe(@"RZASSERT_CONFORMS_PROTOCOL works", ^{
 
-    it(@"throws exception for non-conformant objects", ^{
+    it(@"handles nil objects correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_CONFORMS_PROTOCOL(nilString, @protocol(NSObject));
+            RZASSERT_CONFORMS_PROTOCOL(kNilString, @protocol(NSObject));
         })).to.beTruthy();
     });
 
-    it(@"does not throw exception for protocol-conformant objects", ^{
+    it(@"handles non-conformant objects correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_CONFORMS_PROTOCOL(nonEmptyString, @protocol(NSObject));
+            RZASSERT_CONFORMS_PROTOCOL(kNonEmptyString, @protocol(NSXMLParserDelegate));
+        })).to.beTruthy();
+    });
+
+    it(@"handles conformant objects correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_CONFORMS_PROTOCOL(kNonEmptyString, @protocol(NSObject));
         })).to.beFalsy();
     });
 
@@ -375,20 +423,26 @@ describe(@"RZASSERT_CLASS_SUBCLASS_OF_CLASS works", ^{
 
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_CLASS_SUBCLASS_OF_CLASS([nilString class], [NSObject class]);
+            RZASSERT_CLASS_SUBCLASS_OF_CLASS([kNilString class], [NSObject class]);
         })).to.beTruthy();
     });
 
-    it(@"throws an exception non-subclasses", ^{
+    it(@"handles non-subclasses correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_CLASS_SUBCLASS_OF_CLASS([nonEmptyString class], [NSNumber class]);
+            RZASSERT_CLASS_SUBCLASS_OF_CLASS([kNonEmptyString class], [NSNumber class]);
         })).to.beTruthy();
     });
 
-    it(@"does not throw an exception for subclasses", ^{
+    it(@"handles same classes correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_CLASS_SUBCLASS_OF_CLASS([nonEmptyString class], [NSString class]);
+            RZASSERT_CLASS_SUBCLASS_OF_CLASS([kNonEmptyString class], [NSString class]);
         })).to.beFalsy();
+    });
+
+    it(@"handles non-subclasses correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_CLASS_SUBCLASS_OF_CLASS([kNonEmptyString class], [NSArray class]);
+        })).to.beTruthy();
     });
 
 });
