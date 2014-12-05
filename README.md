@@ -3,7 +3,7 @@ RZAssert
 
 [![Build Status](https://travis-ci.org/Raizlabs/RZAssert.svg)](https://travis-ci.org/Raizlabs/RZAssert)
 
-RZAssert adds ease of implementation and clarity of intent to your assertions. RZAssert defines macros which - like comments - express intent, but never go out of date. RZ_ASSERT_TRUE, RZ_ASSERT_FALSE, RZASSERT_NOT_NIL, and RZASSERT_NONEMPTY_STRING all do exactly what you think they do.
+`RZAssert` adds ease of implementation and clarity of intent to your assertions. RZAssert defines macros which - like comments - express intent, but never go out of date. `RZ_ASSERT_TRUE`, `RZ_ASSERT_FALSE`, `RZASSERT_NOT_NIL`, and `RZASSERT_NONEMPTY_STRING` all do exactly what you think they do.
 
 `RZAssert` includes more exciting assertions that come in handy in a variety of contexts. For example:
 
