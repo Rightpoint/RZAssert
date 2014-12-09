@@ -55,7 +55,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Installation
 
-RZDesignable is available through [CocoaPods](http://cocoapods.org). To install
+RZAssert is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
     pod RZAssert, '~> 0.1'
