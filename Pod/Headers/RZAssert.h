@@ -260,7 +260,7 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
 
 #define RZASSERT_INVALID_CONDITION(reason) \
     else { \
-        NSAssert(FALSE, @"**** Assertion: Execution should have taken one of the defined conditional branches because %@, but couldn't satisfy any of the defined conditions **** \nSelf: \"%@\"", reason, self) \
+        NSAssert(FALSE, @"**** Assertion: Execution should have taken one of the defined conditional branches because %@, but couldn't satisfy any of the defined conditions **** \nSelf: \"%@\"", reason, self); \
     }
 
 
@@ -278,7 +278,7 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
 
 #define RZASSERT_INVALID_SWITCH_CASE(constant, reason) \
     case constant: { \
-        NSAssert(FALSE, @"**** Assertion: Execution should have taken one of the defined valid cases because %@, but the value being switched is an unexpected constant **** \nSelf: \"%@\"", reason, self) \
+        NSAssert(FALSE, @"**** Assertion: Execution should have taken one of the defined valid cases because %@, but the value being switched is an unexpected constant **** \nSelf: \"%@\"", reason, self); \
         break;\
     }
 
@@ -288,7 +288,7 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
 
 #define RZASSERT_SWITCH_SHOULD_NOT_HIT_DEFAULT_CASE(reason) \
     default: { \
-        NSAssert(FALSE, @"**** Assertion: Execution should have taken one of the defined cases because %@, but the value being switched on doesn't satisfy any of them **** \nSelf: \"%@\"", reason, self) \
+        NSAssert(FALSE, @"**** Assertion: Execution should have taken one of the defined cases because %@, but the value being switched on doesn't satisfy any of them **** \nSelf: \"%@\"", reason, self); \
         break; \
     }
 
