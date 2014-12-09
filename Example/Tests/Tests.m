@@ -461,7 +461,7 @@ describe(@"RZASSERT_SHOULD_NEVER_GET_HERE works", ^{
 
     it(@"always throws an exception", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_SHOULD_NEVER_GET_HERE;
+            RZASSERT_SHOULD_NEVER_GET_HERE(@"because I said so!");
         })).to.beTruthy();
     });
 
