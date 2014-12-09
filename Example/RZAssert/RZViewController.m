@@ -111,7 +111,49 @@
 
 - (IBAction)throwAssertionRZAssertShouldNeverGetHere:(id)sender
 {
-    RZASSERT_SHOULD_NEVER_GET_HERE;
+    RZASSERT_SHOULD_NEVER_GET_HERE(@"I said so :oP");
+}
+
+- (IBAction)throwAssertionRZAssertInvalidCondition:(id)sender
+{
+    if( NO ) {
+        // will never be entered
+    }
+    else if ( NO ) {
+        // also never entered
+    }
+    RZASSERT_INVALID_CONDITION(@"I said so :oP");
+}
+
+- (IBAction)throwAssertionRZAssertInvalidSwitchCase:(id)sender
+{
+    NSInteger test = -1;
+    switch ( test ) {
+        case 0: {
+            break;
+        }
+        case 1: {
+            break;
+        }
+        default: {
+            break;
+        }
+        RZASSERT_INVALID_SWITCH_CASE(-1, @"I said so :oP");
+    }
+}
+
+- (IBAction)throwAssertionRZAssertSwitchShouldNotHitDefaultCase:(id)sender
+{
+    NSInteger test = -1;
+    switch ( test ) {
+        case 0: {
+            break;
+        }
+        case 1: {
+            break;
+        }
+        RZASSERT_SWITCH_SHOULD_NOT_HIT_DEFAULT_CASE(@"I said so :oP");
+    }
 }
 
 @end

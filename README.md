@@ -31,7 +31,7 @@ You define a switch statement with a case that should never occur. Use `RZASSERT
 	{
 		switch ( awesomeMode ) {
 			case INVAwesomeModeNotSet: {
-				RZASSERT_SHOULD_NEVER_GET_HERE;
+				RZASSERT_SHOULD_NEVER_GET_HERE(@"this mode is not so awesome");
 				break;
 	  		case INVAwesomeModeIsAwesome: {
 				[self doAwesomeStuff];

@@ -241,10 +241,58 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
 /**
  *  Raise an exception. Return void. 
  *
+ *  @param reason   A string explaining why execution should never reach the point the assert is located.
  */
 
-#define RZASSERT_SHOULD_NEVER_GET_HERE \
-    NSAssert(FALSE, @"**** Assertion: Should Never Get Here **** \nSelf: \"%@\"", self)
+#define RZASSERT_SHOULD_NEVER_GET_HERE(reason) \
+    NSAssert(FALSE, @"**** Assertion: Should Never Get Here Because %@ **** \nSelf: \"%@\"", reason, self)
+
+
+
+// Invalid condition
+
+/**
+ *  Raise an exception if execution does not enter any branch of an if/else-if chain without a valid else condition
+ *
+ *  @param reason A string that explains why there is no valid else condition
+ *
+ *  @return void
+ */
+
+#define RZASSERT_INVALID_CONDITION(reason) \
+    else { \
+        NSAssert(FALSE, @"**** Assertion: Execution should have taken one of the defined conditional branches because %@, but couldn't satisfy any of the defined conditions **** \nSelf: \"%@\"", reason, self); \
+    }
+
+
+
+// Invalid switch case
+
+/**
+ *  Raise an exception if a switch does not enter any valid cases
+ *
+ *  @param constant The constant for the case that should never be entered
+ *  @param reason   A string that explains why the case is invalid
+ *
+ *  @return void
+ */
+
+#define RZASSERT_INVALID_SWITCH_CASE(constant, reason) \
+    case constant: { \
+        NSAssert(FALSE, @"**** Assertion: Execution should have taken one of the defined valid cases because %@, but the value being switched is an unexpected constant **** \nSelf: \"%@\"", reason, self); \
+        break;\
+    }
+
+
+
+// Switch should not hit default
+
+#define RZASSERT_SWITCH_SHOULD_NOT_HIT_DEFAULT_CASE(reason) \
+    default: { \
+        NSAssert(FALSE, @"**** Assertion: Execution should have taken one of the defined cases because %@, but the value being switched on doesn't satisfy any of them **** \nSelf: \"%@\"", reason, self); \
+        break; \
+    }
+
 
 
 #pragma mark - Block Assertions
