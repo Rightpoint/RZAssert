@@ -111,7 +111,7 @@
 
 - (IBAction)throwAssertionRZAssertShouldNeverGetHere:(id)sender
 {
-    RZASSERT_SHOULD_NEVER_GET_HERE;
+    RZASSERT_SHOULD_NEVER_GET_HERE(@"Because I said so!");
 }
 
 @end
