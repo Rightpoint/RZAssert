@@ -467,4 +467,55 @@ describe(@"RZASSERT_SHOULD_NEVER_GET_HERE works", ^{
 
 });
 
+describe(@"RZASSERT_INVALID_CONDITION works", ^{
+    it(@"always throws an exception", ^{
+        expect(testAssertionWithBlock(^{
+            if( NO ) {
+                // will never be entered
+            }
+            else if ( NO ) {
+                // also never entered
+            }
+            RZASSERT_INVALID_CONDITION(@"I said so :oP");
+        })).to.beTruthy();
+    });
+});
+
+describe(@"RZASSERT_INVALID_SWITCH_CASE works", ^{
+    it(@"always throws an exception", ^{
+        expect(testAssertionWithBlock(^{
+            NSInteger test = -1;
+            switch ( test ) {
+                case 0: {
+                    break;
+                }
+                case 1: {
+                    break;
+                }
+                default: {
+                    break;
+                }
+                RZASSERT_INVALID_SWITCH_CASE(-1, @"I said so :oP");
+            }
+        })).to.beTruthy();
+    });
+});
+
+describe(@"RZASSERT_SWITCH_SHOULD_NOT_HIT_DEFAULT_CASE works", ^{
+    it(@"always throws an exception", ^{
+        expect(testAssertionWithBlock(^{
+            NSInteger test = -1;
+            switch ( test ) {
+                case 0: {
+                    break;
+                }
+                case 1: {
+                    break;
+                }
+                RZASSERT_SWITCH_SHOULD_NOT_HIT_DEFAULT_CASE(@"I said so :oP");
+            }
+        })).to.beTruthy();
+    });
+});
+
 SpecEnd
