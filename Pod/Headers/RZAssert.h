@@ -241,10 +241,11 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
 /**
  *  Raise an exception. Return void. 
  *
+ *  @param reason   A string explaining why execution should never reach the point the assert is located.
  */
 
-#define RZASSERT_SHOULD_NEVER_GET_HERE \
-    NSAssert(FALSE, @"**** Assertion: Should Never Get Here **** \nSelf: \"%@\"", self)
+#define RZASSERT_SHOULD_NEVER_GET_HERE(reason) \
+    NSAssert(FALSE, @"**** Assertion: Should Never Get Here Because %@ **** \nSelf: \"%@\"", reason, self)
 
 
 
