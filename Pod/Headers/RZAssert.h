@@ -202,7 +202,7 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
  *  Raise an exception if object's class does not conform to protocol. Return void.
  *
  *  @param object        An object instance.
- *  @param testClass     ????????????.
+ *  @param testClass     A class.
  */
 
 #define RZASSERT_CONFORMS_PROTOCOL(object, protocol) \
