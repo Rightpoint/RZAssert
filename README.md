@@ -21,8 +21,8 @@ You define a method on a class, but you want that method to ONLY be called by su
 You define a switch statement with a case that should never occur. Use `RZASSERT_SHOULD_NEVER_GET_HERE` to throw an exception if your program passes the undesired case to the switch statement:
 
 	typedef NS_ENUM(NSInteger, RZAwesomeMode) {
-		INVAwesomeModeNotSet = 0,
-		INVAwesomeModeIsAwesome
+		AwesomeModeNotSet = 0,
+		AwesomeModeIsAwesome
 	};
 
 	@implementation RZMyClass
@@ -30,10 +30,10 @@ You define a switch statement with a case that should never occur. Use `RZASSERT
 	- (void)configureThingsForAwesomeMode:(RZAwesomeMode)awesomeMode
 	{
 		switch ( awesomeMode ) {
-			case INVAwesomeModeNotSet: {
+			case AwesomeModeNotSet: {
 				RZASSERT_SHOULD_NEVER_GET_HERE;
 				break;
-	  		case INVAwesomeModeIsAwesome: {
+	  		case AwesomeModeIsAwesome: {
 				[self doAwesomeStuff];
 				break;
 			}
