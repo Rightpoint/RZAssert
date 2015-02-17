@@ -58,7 +58,7 @@
  */
 
 #define RZASSERT_ALWAYS \
-    NSAssert(FALSE, @"**** Unexpected Assertion **** \nSelf: \"%@\"", self)
+    NSAssert(NO, @"**** Unexpected Assertion **** \nSelf: \"%@\"", self)
 
 
 /**
@@ -88,10 +88,10 @@
  */
 
 #define RZASSERT_WITH_MESSAGE(message, ...) \
-    NSAssert(FALSE, @"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self)
+    NSAssert(NO, @"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self)
 
 #define RZASSERT_WITH_MESSAGE_LOG(expression, message, ...) \
-    NSAssert(FALSE, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\" \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self)
+    NSAssert(NO, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\" \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self)
 
 #define RZASSERT_TRUE_WITH_MESSAGE(test, message, ...) \
     NSAssert(test, @"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self)
@@ -232,7 +232,7 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
  */
 
 #define RZASSERT_SUBCLASSES_MUST_OVERRIDE \
-    NSAssert(FALSE, @"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@\n", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
+    NSAssert(NO, @"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@\n", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
 
 
 
@@ -244,7 +244,7 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
  */
 
 #define RZASSERT_SHOULD_NEVER_GET_HERE \
-    NSAssert(FALSE, @"**** Assertion: Should Never Get Here **** \nSelf: \"%@\"", self)
+    NSAssert(NO, @"**** Assertion: Should Never Get Here **** \nSelf: \"%@\"", self)
 
 
 #pragma mark - Block Assertions
