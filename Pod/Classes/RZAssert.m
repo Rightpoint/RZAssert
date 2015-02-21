@@ -26,3 +26,52 @@
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+#import "RZAssert.h"
+
+@interface RZAssert ()
+
+@property (copy, nonatomic) void (^loggingHandler)(NSString *message);
+
++ (instancetype)sharedInstance;
+
+@end
+
+@implementation RZAssert
+
++ (instancetype)sharedInstance
+{
+    static RZAssert *s_sharedInstance = nil;
+
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        s_sharedInstance = [[self alloc] init];
+    });
+
+    return s_sharedInstance;
+}
+
+#pragma mark - Public
+
++ (void)configureWithLoggingHandler:(void(^)(NSString *message))loggingHandler
+{
+    NSParameterAssert(loggingHandler);
+    [[self sharedInstance] setLoggingHandler:loggingHandler];
+}
+
++ (void)logMessageWithFormat:(NSString *)format, ...
+{
+    NSParameterAssert(format);
+
+    va_list args;
+    va_start(args, format);
+    NSString *formattedString = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+
+    void(^loggingHandler)(NSString *) = [[self sharedInstance] loggingHandler];
+    
+    if ( loggingHandler ) {
+        loggingHandler(formattedString);
+    }
+}
+
+@end

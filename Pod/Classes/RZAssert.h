@@ -26,6 +26,16 @@
 //  WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+@import Foundation;
+
+@interface RZAssert : NSObject
+
++ (void)configureWithLoggingHandler:(void(^)(NSString *message))loggingHandler;
+
++ (void)logMessageWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1, 2);
+
+@end
+
 #pragma mark - Basic Assertions
 
 // General Assertions
@@ -39,8 +49,19 @@
  *  @param object     An object instance to compare with nil.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_NIL(object) \
-    NSAssert((object == nil), @"**** Unexpected Nil Assertion **** \nExpected nil, but " #object @" is not nil \nSelf: \"%@\"", self)
+    do { \
+        if ( (object) ) { \
+            [RZAssert logMessageWithFormat:@"**** Unexpected Nil Assertion **** \nExpected nil, but " #object @" is not nil \nSelf: \"%@\"", self]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_NIL(object) \
+    do { \
+        NSAssert((object == nil), @"**** Unexpected Nil Assertion **** \nExpected nil, but " #object @" is not nil \nSelf: \"%@\"", self); \
+    } while(0)
+#endif
 
 
 /**
@@ -49,17 +70,36 @@
  *  @param object     An object instance to compare with nil.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_NOT_NIL(object) \
-    NSAssert((object != nil), @"**** Unexpected Non-Nil Assertion **** \nExpected not nil, but " #object @" is nil \nSelf: \"%@\"", self)
+    do { \
+        if ( !(object) ) { \
+            [RZAssert logMessageWithFormat:@"**** Unexpected Non-Nil Assertion **** \nExpected not nil, but " #object @" is nil \nSelf: \"%@\"", self]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_NOT_NIL(object) \
+    do { \
+        NSAssert((object), @"**** Unexpected Non-Nil Assertion **** \nExpected not nil, but " #object @" is nil \nSelf: \"%@\"", self); \
+    } while(0)
+#endif
 
 
 /**
  *  Raise an exception. Return void.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_ALWAYS \
-    NSAssert(FALSE, @"**** Unexpected Assertion **** \nSelf: \"%@\"", self)
-
+    do { \
+        [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** \nSelf: \"%@\"", self]; \
+    } while(0)
+#else
+#define RZASSERT_ALWAYS \
+    do { \
+        NSAssert(NO, @"**** Unexpected Assertion **** \nSelf: \"%@\"", self); \
+    } while(0)
+#endif
 
 /**
  *  Raise an exception if object evaulates to 0. Return void.
@@ -67,9 +107,19 @@
  *  @param object     An object instance to compare with 0.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_TRUE(test) \
-    NSAssert(test, @"**** Unexpected Assertion **** \nSelf: \"%@\"", self)
-
+    do { \
+        if ( !(test) ) { \
+            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** \nSelf: \"%@\"", self]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_TRUE(test) \
+    do { \
+        NSAssert((test), @"**** Unexpected Assertion **** \nSelf: \"%@\"", self); \
+    } while(0)
+#endif
 
 /**
  *  Raise an exception if object evaluates to 1. Return void.
@@ -77,9 +127,19 @@
  *  @param object     An object instance to compare with 1.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_FALSE(test) \
-    NSAssert(!test, @"**** Unexpected Assertion **** \nSelf: \"%@\"", self)
-
+    do { \
+        if ( (test) ) { \
+            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** \nSelf: \"%@\"", self]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_FALSE(test) \
+    do { \
+        NSAssert(!(test), @"**** Unexpected Assertion **** \nSelf: \"%@\"", self); \
+    } while(0)
+#endif
 
 /**
  *  Raise an exception. Return void.
@@ -87,23 +147,73 @@
  *  @param message     A printf-style format string that describes the failure condition.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_WITH_MESSAGE(message, ...) \
-    NSAssert(FALSE, @"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self)
+    do { \
+        [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self]; \
+    } while(0)
+#else
+#define RZASSERT_WITH_MESSAGE(message, ...) \
+    do { \
+        NSAssert(NO, @"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self); \
+    } while(0)
+#endif
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_WITH_MESSAGE_LOG(expression, message, ...) \
-    NSAssert(FALSE, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\" \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self)
+    do { \
+        [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** %@ \nExpression: \"%@\" \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self]; \
+    } while(0)
+#else
+#define RZASSERT_WITH_MESSAGE_LOG(expression, message, ...) \
+    do { \
+        NSAssert(NO, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\" \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self); \
+    } while(0)
+#endif
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_TRUE_WITH_MESSAGE(test, message, ...) \
-    NSAssert(test, @"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self)
+    do { \
+        if ( !(test) ) { \
+            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_TRUE_WITH_MESSAGE(test, message, ...) \
+    do { \
+        NSAssert(test, @"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self); \
+    } while(0)
+#endif
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_TRUE_WITH_MESSAGE_LOG(test, expression, message, ...) \
-    NSAssert(test, @"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\", \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self)
+    do { \
+        if ( !(test) ) { \
+            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\", \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_TRUE_WITH_MESSAGE_LOG(test, expression, message, ...) \
+    do { \
+        NSAssert(test, @"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\", \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self); \
+    } while(0)
+#endif
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_TRUE_LOG(test, expression) \
-    NSAssert(test, @"**** Unexpected Assertion **** \nExpression \"%@\" \nSelf: \"%@\"", expression, self);
+    do { \
+        if ( !(test) ) { \
+            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** \nExpression \"%@\" \nSelf: \"%@\"", expression, self]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_TRUE_LOG(test, expression) \
+    do { \
+        NSAssert(test, @"**** Unexpected Assertion **** \nExpression \"%@\" \nSelf: \"%@\"", expression, self); \
+    } while(0)
+#endif
 
 # pragma mark - Higher-Level Assertions
-
 
 // Equality Assertions
 
@@ -115,8 +225,19 @@
  *  @param y     An object instance.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_EQUAL_OBJECT_POINTERS(x, y) \
-    NSAssert(x == y, @"**** Object Pointers Unexpectedly Unequal **** \nReason: Left: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class]))
+    do { \
+        if ( (x) != (y) ) { \
+            [RZAssert logMessageWithFormat:@"**** Object Pointers Unexpectedly Unequal **** \nReason: Left: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class])]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_EQUAL_OBJECT_POINTERS(x, y) \
+    do { \
+        NSAssert( (x) == (y), @"**** Object Pointers Unexpectedly Unequal **** \nReason: Left: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class])); \
+    } while(0)
+#endif
 
 
 /**
@@ -134,9 +255,19 @@
  *  @param y     An object instance.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_EQUAL_OBJECTS(x, y) \
-    NSAssert((!x && !y) || [x isEqual:y], @"**** Objects Unexpectedly Unequal **** \nLeft: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class]))
-
+    do { \
+        if ( !( (!(x) && !(y)) || [(x) isEqual:(y)] ) ) { \
+            [RZAssert logMessageWithFormat:@"**** Objects Unexpectedly Unequal **** \nLeft: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class])]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_EQUAL_OBJECTS(x, y) \
+    do { \
+        NSAssert( (!(x) && !(y)) || [(x) isEqual:(y)] , @"**** Objects Unexpectedly Unequal **** \nLeft: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class])); \
+    } while(0)
+#endif
 
 // String Assertions
 
@@ -148,8 +279,19 @@
  *  @param y     An NSString instance.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_EQUAL_STRINGS(x, y) \
-    NSAssert((!x && !y) || [x isEqualToString:y], @"**** Strings Unexpectedly Unequal **** \nLeft: \"%@\"\nRight: \"%@\"", x, y)
+    do { \
+        if ( !( (!(x) && !(y)) || [(x) isEqualToString:(y)] ) ) { \
+            [RZAssert logMessageWithFormat:@"**** Strings Unexpectedly Unequal **** \nLeft: \"%@\"\nRight: \"%@\"", x, y]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_EQUAL_STRINGS(x, y) \
+    do { \
+        NSAssert( (!(x) && !(y)) || [(x) isEqualToString:(y)] , @"**** Strings Unexpectedly Unequal **** \nLeft: \"%@\"\nRight: \"%@\"", x, y); \
+    } while(0)
+#endif
 
 /**
  *  Raise an exception if string is @"". Return void.
@@ -157,9 +299,19 @@
  *  @param string An NSString instance.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_NONEMPTY_STRING(string) \
-    NSAssert(string != nil && [string isKindOfClass:[NSString class]] && [string length] > 0, @"**** Unexpected Nil, Wrong Class, or Empty String **** \nReason: Expected non-empty string but got: \"%@\" \nSelf: \"%@\"", string, self)
-
+    do { \
+        if ( !( (string) != nil && [(string) isKindOfClass:[NSString class]] && [(string) length] > 0 ) ) { \
+            [RZAssert logMessageWithFormat:@"**** Unexpected Nil, Wrong Class, or Empty String **** \nReason: Expected non-empty string but got: \"%@\" \nSelf: \"%@\"", string, self]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_NONEMPTY_STRING(string) \
+    do { \
+        NSAssert((string) != nil && [(string) isKindOfClass:[NSString class]] && [(string) length] > 0, @"**** Unexpected Nil, Wrong Class, or Empty String **** \nReason: Expected non-empty string but got: \"%@\" \nSelf: \"%@\"", string, self); \
+    } while(0)
+#endif
 
 // Type Checks
 
@@ -171,9 +323,19 @@
  *  @param testClass     A class.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_KINDOF(object, testClass) \
-    NSAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class]))
-
+    do { \
+        if ( ![(object) isKindOfClass:testClass] ) { \
+            [RZAssert logMessageWithFormat:@"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_KINDOF(object, testClass) \
+    do { \
+        NSAssert([(object) isKindOfClass:testClass], @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])); \
+    } while(0)
+#endif
 
 /**
  *  Raise an exception if object is not an instance of testClass. Return void.
@@ -182,9 +344,19 @@
  *  @param testClass     A class.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZCASSERT_KINDOF(object, testClass) \
-NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class]))
-
+    do { \
+        if ( ![(object) isKindOfClass:testClass] ) { \
+            [RZAssert logMessageWithFormat:@"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])]; \
+        } \
+    } while(0)
+#else
+#define RZCASSERT_KINDOF(object, testClass) \
+    do { \
+        NSCAssert([(object) isKindOfClass:testClass], @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])); \
+    } while(0)
+#endif
 
 /**
  *  Raise an exception if object is not an instance of testClass, or is not nil. 
@@ -194,9 +366,19 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
  *  @param y     A class.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_KINDOF_OR_NIL(object, testClass) \
-    NSAssert([object isKindOfClass:testClass] || object == nil, @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class]))
-
+    do { \
+        if ( !([(object) isKindOfClass:testClass] || (object) == nil) ) { \
+            [RZAssert logMessageWithFormat:@"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_KINDOF_OR_NIL(object, testClass) \
+    do { \
+        NSAssert([(object) isKindOfClass:testClass] || (object) == nil, @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])); \
+    } while(0)
+#endif
 
 /**
  *  Raise an exception if object's class does not conform to protocol. Return void.
@@ -205,9 +387,19 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
  *  @param testClass     ????????????.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_CONFORMS_PROTOCOL(object, protocol) \
-    NSAssert([object conformsToProtocol:protocol], @"**** Object Unexpectedly Doesn't Conform to Protocol **** \nReason: Expected object: \"%@\" of class \"%@\" to conform to protocol \"%@\", but it does not.", object, NSStringFromClass([object class]), NSStringFromProtocol(protocol))
-
+    do { \
+        if ( ![(object) conformsToProtocol:protocol] ) { \
+            [RZAssert logMessageWithFormat:@"**** Object Unexpectedly Doesn't Conform to Protocol **** \nReason: Expected object: \"%@\" of class \"%@\" to conform to protocol \"%@\", but it does not.", object, NSStringFromClass([object class]), NSStringFromProtocol(protocol)]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_CONFORMS_PROTOCOL(object, protocol) \
+    do { \
+        NSAssert([(object) conformsToProtocol:protocol], @"**** Object Unexpectedly Doesn't Conform to Protocol **** \nReason: Expected object: \"%@\" of class \"%@\" to conform to protocol \"%@\", but it does not.", object, NSStringFromClass([object class]), NSStringFromProtocol(protocol)); \
+    } while(0)
+#endif
 
 /**
  *  Raise an exception if object is not a subclass of testClass, or is not nil. 
@@ -217,9 +409,19 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
  *  @param parentClass     A class.
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_CLASS_SUBCLASS_OF_CLASS(subclass, parentClass) \
-    NSAssert([subclass isSubclassOfClass:parentClass], @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", subclass, parentClass)
-
+    do { \
+        if ( ![(subclass) isSubclassOfClass:(parentClass)] ) { \
+            [RZAssert logMessageWithFormat:@"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", subclass, parentClass]; \
+        } \
+    } while(0)
+#else
+#define RZASSERT_CLASS_SUBCLASS_OF_CLASS(subclass, parentClass) \
+    do { \
+        NSAssert([(subclass) isSubclassOfClass:(parentClass)], @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", subclass, parentClass); \
+    } while(0)
+#endif
 
 // Overrides
 
@@ -231,10 +433,17 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
  * otherwise be left empty
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_SUBCLASSES_MUST_OVERRIDE \
-    NSAssert(FALSE, @"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@\n", NSStringFromClass([self class]), NSStringFromSelector(_cmd));
-
-
+    do { \
+        [RZAssert logMessageWithFormat:@"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@\n", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]; \
+    } while(0)
+#else
+#define RZASSERT_SUBCLASSES_MUST_OVERRIDE \
+    do { \
+        NSAssert(NO, @"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@\n", NSStringFromClass([self class]), NSStringFromSelector(_cmd)); \
+    } while(0)
+#endif
 
 // Should-never-get-here
 
@@ -243,9 +452,17 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
  *
  */
 
+#if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_SHOULD_NEVER_GET_HERE \
-    NSAssert(FALSE, @"**** Assertion: Should Never Get Here **** \nSelf: \"%@\"", self)
-
+    do { \
+        [RZAssert logMessageWithFormat:@"**** Assertion: Should Never Get Here **** \nSelf: \"%@\"", self]; \
+    } while(0)
+#else
+#define RZASSERT_SHOULD_NEVER_GET_HERE \
+    do { \
+        NSAssert(NO, @"**** Assertion: Should Never Get Here **** \nSelf: \"%@\"", self); \
+    } while(0)
+#endif
 
 #pragma mark - Block Assertions
 
@@ -259,7 +476,7 @@ NSCAssert([object isKindOfClass:testClass], @"**** Object of Unexpected Class **
 #if !defined(NS_BLOCK_ASSERTIONS)
 
 #define RZASSERT_BLOCK(condition, desc, ...) \
-do {\
+do { \
 if ( !(condition) ) { \
     [[NSAssertionHandler currentHandler] handleFailureInFunction:NSStringFromSelector(_cmd) \
                                                             file:[NSString stringWithUTF8String:__FILE__] \
