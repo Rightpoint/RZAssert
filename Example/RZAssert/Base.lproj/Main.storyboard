@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GTM-CB-jAx">
-                                <rect key="frame" x="109" y="52" width="102" height="27"/>
+                                <rect key="frame" x="109" y="40" width="102" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="RZASSERT_TRUE">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,7 +28,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aei-hZ-bmp">
-                                <rect key="frame" x="107" y="109" width="106" height="27"/>
+                                <rect key="frame" x="107" y="87" width="106" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="RZASSERT_FALSE">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -38,7 +38,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7O-rE-MvI">
-                                <rect key="frame" x="116" y="170" width="89" height="27"/>
+                                <rect key="frame" x="116" y="134" width="89" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="RZASSERT_NIL">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -48,7 +48,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBz-42-GWJ">
-                                <rect key="frame" x="100" y="228" width="120" height="27"/>
+                                <rect key="frame" x="100" y="181" width="120" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="RZASSERT_NOT_NIL">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -58,7 +58,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wjj-Ad-NsL">
-                                <rect key="frame" x="66" y="285" width="189" height="27"/>
+                                <rect key="frame" x="66" y="228" width="189" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="RZASSERT_NONEMPTY_STRING">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -68,7 +68,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNM-mp-3t8">
-                                <rect key="frame" x="31" y="346" width="258" height="27"/>
+                                <rect key="frame" x="31" y="275" width="258" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="RZASSERT_SUBCLASSES_MUST_OVERRIDE">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,7 +78,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bOr-SD-bli">
-                                <rect key="frame" x="42" y="403" width="235" height="27"/>
+                                <rect key="frame" x="42" y="322" width="235" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="RZASSERT_SHOULD_NEVER_GET_HERE">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,23 +87,36 @@
                                     <action selector="throwAssertionRZAssertShouldNeverGetHere:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="jgb-ry-z43"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="whB-uG-OpM">
+                                <rect key="frame" x="44" y="369" width="231" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="RZASSERT_EQUAL_OBJECT_POINTERS">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="throwAssertionRZAssertShouldNeverGetHere:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dHj-xW-HNQ"/>
+                                    <action selector="throwEqualObjectPointerAssertion:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="kaI-tw-eTZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="CNM-mp-3t8" firstAttribute="top" secondItem="Wjj-Ad-NsL" secondAttribute="bottom" constant="34" id="77V-Ss-9NP"/>
-                            <constraint firstItem="aei-hZ-bmp" firstAttribute="top" secondItem="GTM-CB-jAx" secondAttribute="bottom" constant="30" id="CFM-t1-lM9"/>
-                            <constraint firstItem="bOr-SD-bli" firstAttribute="top" secondItem="CNM-mp-3t8" secondAttribute="bottom" constant="30" id="Ed2-YZ-7tP"/>
-                            <constraint firstItem="Wjj-Ad-NsL" firstAttribute="top" secondItem="mBz-42-GWJ" secondAttribute="bottom" constant="30" id="Fbp-WF-sJh"/>
-                            <constraint firstItem="K7O-rE-MvI" firstAttribute="top" secondItem="aei-hZ-bmp" secondAttribute="bottom" constant="34" id="IZQ-MG-AoG"/>
+                            <constraint firstItem="CNM-mp-3t8" firstAttribute="top" secondItem="Wjj-Ad-NsL" secondAttribute="bottom" constant="20" id="77V-Ss-9NP"/>
+                            <constraint firstItem="aei-hZ-bmp" firstAttribute="top" secondItem="GTM-CB-jAx" secondAttribute="bottom" constant="20" id="CFM-t1-lM9"/>
+                            <constraint firstItem="bOr-SD-bli" firstAttribute="top" secondItem="CNM-mp-3t8" secondAttribute="bottom" constant="20" id="Ed2-YZ-7tP"/>
+                            <constraint firstItem="Wjj-Ad-NsL" firstAttribute="top" secondItem="mBz-42-GWJ" secondAttribute="bottom" constant="20" id="Fbp-WF-sJh"/>
+                            <constraint firstItem="K7O-rE-MvI" firstAttribute="top" secondItem="aei-hZ-bmp" secondAttribute="bottom" constant="20" id="IZQ-MG-AoG"/>
+                            <constraint firstItem="whB-uG-OpM" firstAttribute="top" secondItem="bOr-SD-bli" secondAttribute="bottom" constant="20" id="JPq-4H-WRV"/>
                             <constraint firstItem="mBz-42-GWJ" firstAttribute="centerX" secondItem="GTM-CB-jAx" secondAttribute="centerX" id="POD-58-ZuQ"/>
                             <constraint firstItem="bOr-SD-bli" firstAttribute="centerX" secondItem="GTM-CB-jAx" secondAttribute="centerX" id="TDh-nW-PgP"/>
-                            <constraint firstItem="GTM-CB-jAx" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="32" id="TIe-37-0Pu"/>
+                            <constraint firstItem="GTM-CB-jAx" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" id="TIe-37-0Pu"/>
                             <constraint firstItem="CNM-mp-3t8" firstAttribute="centerX" secondItem="GTM-CB-jAx" secondAttribute="centerX" id="W4V-Ml-QKK"/>
                             <constraint firstItem="GTM-CB-jAx" firstAttribute="centerX" secondItem="K7O-rE-MvI" secondAttribute="centerX" id="aIQ-85-EL0"/>
+                            <constraint firstAttribute="centerX" secondItem="whB-uG-OpM" secondAttribute="centerX" id="apZ-Ae-AOH"/>
                             <constraint firstItem="Wjj-Ad-NsL" firstAttribute="centerX" secondItem="GTM-CB-jAx" secondAttribute="centerX" id="bs4-v5-9ut"/>
                             <constraint firstItem="aei-hZ-bmp" firstAttribute="centerX" secondItem="GTM-CB-jAx" secondAttribute="centerX" id="fsx-li-lyD"/>
                             <constraint firstAttribute="centerX" secondItem="GTM-CB-jAx" secondAttribute="centerX" id="rxf-0t-Cw0"/>
-                            <constraint firstItem="mBz-42-GWJ" firstAttribute="top" secondItem="K7O-rE-MvI" secondAttribute="bottom" constant="31" id="xRQ-Qa-JLP"/>
+                            <constraint firstItem="mBz-42-GWJ" firstAttribute="top" secondItem="K7O-rE-MvI" secondAttribute="bottom" constant="20" id="xRQ-Qa-JLP"/>
                         </constraints>
                     </view>
                 </viewController>

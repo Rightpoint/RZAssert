@@ -114,4 +114,9 @@
     RZASSERT_SHOULD_NEVER_GET_HERE;
 }
 
+- (IBAction)throwEqualObjectPointerAssertion:(id)sender
+{
+    RZASSERT_EQUAL_OBJECT_POINTERS(self, sender);
+}
+
 @end
