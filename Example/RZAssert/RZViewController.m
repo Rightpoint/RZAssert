@@ -8,7 +8,7 @@
 
 #import "RZViewController.h"
 #import "RZViewControllerSubclass.h"
-#import <RZAssert.h>
+#import <RZAssert/RZAssert.h>
 
 @interface RZViewController ()
 
@@ -74,7 +74,7 @@
 
 - (void)assertImplementedBySubclass
 {
-    RZASSERT_SUBCLASSES_MUST_OVERRIDE
+    RZASSERT_SUBCLASSES_MUST_OVERRIDE;
 }
 
 #pragma mark - Actions
