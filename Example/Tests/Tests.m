@@ -28,6 +28,9 @@ static BOOL testAssertionWithBlock(AssertionBlock block)
     BOOL worked = NO;
 
 #if defined(NS_BLOCK_ASSERTIONS)
+    int *thingy = NULL;
+    *thingy = 10;
+
     block();
     if ( loggedMessage ) {
         worked = YES;
