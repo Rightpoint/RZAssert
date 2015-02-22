@@ -293,12 +293,11 @@ describe(@"RZASSERT_EQUAL_OBJECTS", ^{
 
     it(@"handles non-pointer-equal objects correctly", ^{
         expect(testAssertionWithBlock(^{
-            NSString *oneString = @"one";
-            NSString *twoString = @"on";
-            twoString = [twoString stringByAppendingString:@"e"];
+            NSString *literalString = @"one";
+            NSString *composedString = [@"on" stringByAppendingString:@"e"];
 
             expect(testAssertionWithBlock(^{
-                RZASSERT_EQUAL_OBJECTS(oneString, twoString);
+                RZASSERT_EQUAL_OBJECTS(literalString, composedString);
             })).to.beFalsy();
         }));
     });
