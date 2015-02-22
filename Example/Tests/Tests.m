@@ -14,18 +14,60 @@ static NSString* const kNonEmptyString = @"non-empty string";
 static NSString* const kTestMessage = @"test message";
 
 typedef void (^AssertionBlock)(void);
+typedef void (^LoggingAssertionBlock)(NSString *message);
 
 static BOOL testAssertionWithBlock(AssertionBlock block)
 {
     NSCAssert(block != nil, @"assertion block must not be nil");
 
+    __block NSString *loggedMessage = nil;
+    [RZAssert configureWithLoggingHandler:^(NSString *message) {
+        loggedMessage = message;
+    }];
+
     BOOL worked = NO;
+
+#if defined(NS_BLOCK_ASSERTIONS)
+    block();
+    if ( loggedMessage ) {
+        worked = YES;
+    }
+#else
     @try {
         block();
     }
     @catch (NSException *e) {
         worked = YES;
     }
+#endif
+
+    return worked;
+}
+
+static BOOL testLoggingAssertionWithBlock(LoggingAssertionBlock loggingBlock)
+{
+    NSCAssert(loggingBlock != nil, @"logging block must not be nil");
+
+    __block NSString *loggedMessage = nil;
+    [RZAssert configureWithLoggingHandler:^(NSString *message) {
+        loggedMessage = message;
+    }];
+
+    BOOL worked = NO;
+
+#if defined(NS_BLOCK_ASSERTIONS)
+    loggingBlock(kNonEmptyString);
+    if ( [loggedMessage containsString:kNonEmptyString] ) {
+        worked = YES;
+    }
+#else
+    @try {
+        loggingBlock(kNonEmptyString);
+    }
+    @catch (NSException *e) {
+        worked = ([e.description rangeOfString:kNonEmptyString].location != NSNotFound);
+    }
+#endif
 
     return worked;
 }
@@ -132,15 +174,9 @@ describe(@"RZASSERT_WITH_MESSAGE works", ^{
 
     it(@"prints message on assert", ^{
 
-        BOOL worked = NO;
-        @try {
-            RZASSERT_WITH_MESSAGE(kNonEmptyString);
-        }
-        @catch (NSException *e) {
-            worked = ([e.description rangeOfString:kNonEmptyString].location != NSNotFound);
-        }
-
-        expect(worked).to.beTruthy();
+        expect(testLoggingAssertionWithBlock(^(NSString *message) {
+            RZASSERT_WITH_MESSAGE(@"%@", message);
+        })).to.beTruthy();
     });
 
 });
@@ -148,31 +184,18 @@ describe(@"RZASSERT_WITH_MESSAGE works", ^{
 describe(@"RZASSERT_WITH_MESSAGE_LOG works", ^{
 
     it(@"prints a message on assert", ^{
-        BOOL worked = NO;
-        @try {
-            RZASSERT_WITH_MESSAGE_LOG(kTestMessage, kNonEmptyString);
-        }
-        @catch (NSException *e) {
-            worked = ([e.description rangeOfString:kNonEmptyString].location != NSNotFound);
-        }
-        expect(worked).to.beTruthy();
+        expect(testLoggingAssertionWithBlock(^(NSString *message) {
+            RZASSERT_WITH_MESSAGE_LOG(kNonEmptyString, @"%@", message);
+        })).to.beTruthy();
     });
-
 });
 
 describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
 
     it(@"handles nil correctly", ^{
-        BOOL worked = NO;
-
-        @try {
-            RZASSERT_TRUE_WITH_MESSAGE(kNilString, kTestMessage);
-        }
-        @catch (NSException *e) {
-            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
-        }
-
-        expect(worked).to.beTruthy();
+        expect(testLoggingAssertionWithBlock(^(NSString *message) {
+            RZASSERT_TRUE_WITH_MESSAGE(kNilString, @"%@", message);
+        })).to.beTruthy();
     });
 
     it(@"handles YES correctly", ^{
@@ -182,16 +205,9 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
     });
 
     it(@"handles NO correctly", ^{
-        BOOL worked = NO;
-
-        @try {
-            RZASSERT_TRUE_WITH_MESSAGE(NO, kTestMessage);
-        }
-        @catch (NSException *e) {
-            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
-        }
-
-        expect(worked).to.beTruthy();
+        expect(testLoggingAssertionWithBlock(^(NSString *message) {
+            RZASSERT_TRUE_WITH_MESSAGE(NO, @"%@", message);
+        })).to.beTruthy();
     });
 
 });
@@ -199,29 +215,15 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
 describe(@"RZASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
 
     it(@"handles nil correctly", ^{
-        BOOL worked = NO;
-
-        @try {
-            RZASSERT_TRUE_WITH_MESSAGE_LOG(nil, kNonEmptyString, kTestMessage);
-        }
-        @catch (NSException *e) {
-            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
-        }
-
-        expect(worked).to.beTruthy();
+        expect(testLoggingAssertionWithBlock(^(NSString *message) {
+            RZASSERT_TRUE_WITH_MESSAGE_LOG(nil, kNonEmptyString, @"%@", message);
+        })).to.beTruthy();
     });
 
     it(@"handles NO correctly", ^{
-        BOOL worked = NO;
-
-        @try {
-            RZASSERT_TRUE_WITH_MESSAGE_LOG(NO, kNonEmptyString, kTestMessage);
-        }
-        @catch (NSException *e) {
-            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
-        }
-
-        expect(worked).to.beTruthy();
+        expect(testLoggingAssertionWithBlock(^(NSString *message) {
+            RZASSERT_TRUE_WITH_MESSAGE_LOG(NO, kNonEmptyString, @"%@", message);
+        })).to.beTruthy();
     });
 
     it(@"handles YES correctly", ^{
@@ -247,16 +249,9 @@ describe(@"RZASSERT_TRUE_LOG works", ^{
     });
 
     it(@"logs a message", ^{
-        BOOL worked = NO;
-
-        @try {
-            RZASSERT_TRUE_LOG(NO, kTestMessage);
-        }
-        @catch (NSException *e) {
-            worked = ([e.description rangeOfString:kTestMessage].location != NSNotFound);
-        }
-
-        expect(worked).to.beTruthy();
+        expect(testLoggingAssertionWithBlock(^(NSString *message) {
+            RZASSERT_TRUE_LOG(NO, message);
+        })).to.beTruthy();
     });
 
 });
