@@ -30,9 +30,7 @@
 
     RZViewControllerSubclass *rzViewControllerSubclass = [[RZViewControllerSubclass alloc] init];
 
-    if ( rzViewControllerSubclass ) {
-        NSLog(@"Calling assertImplementedBySubclass on an instance of RZViewController raises an exception.");
-    }
+    [rzViewControllerSubclass methodThatSubclassesMustOverride];
 }
 
 #pragma mark - RZASSERT_TRUE
@@ -72,7 +70,7 @@
 
 #pragma mark - RZASSERT_SUBCLASSES_MUST_OVERRIDE
 
-- (void)assertImplementedBySubclass
+- (void)methodThatSubclassesMustOverride
 {
     RZASSERT_SUBCLASSES_MUST_OVERRIDE;
 }
