@@ -441,12 +441,12 @@
 #if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_SUBCLASSES_MUST_OVERRIDE \
     do { \
-        [RZAssert logMessageWithFormat:@"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@\n", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]; \
+        [RZAssert logMessageWithFormat:@"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]; \
     } while(0)
 #else
 #define RZASSERT_SUBCLASSES_MUST_OVERRIDE \
     do { \
-        NSAssert(NO, @"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@\n", NSStringFromClass([self class]), NSStringFromSelector(_cmd)); \
+        NSAssert(NO, @"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd)); \
     } while(0)
 #endif
 
