@@ -40,9 +40,6 @@
 
 // General Assertions
 
-#define RZASSERT NSAssert
-
-
 /**
  *  Raise an exception if object is not equal to nil.
  *
