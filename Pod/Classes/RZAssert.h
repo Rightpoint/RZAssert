@@ -46,6 +46,13 @@
 
 @end
 
+#pragma mark - Helpers
+
+#define PRETTY_LOG_MESSAGE_WITH_FORMAT(format, ...) \
+    do { \
+        [RZAssert logMessageWithFormat:[NSString stringWithFormat:@"**** Assertion failsure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, [NSString stringWithFormat:(format), ##__VA_ARGS__]]]; \
+    } while(0);
+
 #pragma mark - Basic Assertions
 
 // General Assertions
@@ -60,7 +67,7 @@
 #define RZASSERT_NIL(object) \
     do { \
         if ( (object) ) { \
-            [RZAssert logMessageWithFormat:@"**** Unexpected Nil Assertion **** \nExpected nil, but " #object @" is not nil \nSelf: \"%@\"", self]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Nil Assertion **** \nExpected nil, but " #object @" is not nil \nSelf: \"%@\"", self) \
         } \
     } while(0)
 #else
@@ -81,7 +88,7 @@
 #define RZASSERT_NOT_NIL(object) \
     do { \
         if ( !(object) ) { \
-            [RZAssert logMessageWithFormat:@"**** Unexpected Non-Nil Assertion **** \nExpected not nil, but " #object @" is nil \nSelf: \"%@\"", self]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Non-Nil Assertion **** \nExpected not nil, but " #object @" is nil \nSelf: \"%@\"", self) \
         } \
     } while(0)
 #else
@@ -99,7 +106,7 @@
 #if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_ALWAYS \
     do { \
-        [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** \nSelf: \"%@\"", self]; \
+        PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Assertion **** \nSelf: \"%@\"", self) \
     } while(0)
 #else
 #define RZASSERT_ALWAYS \
@@ -118,7 +125,7 @@
 #define RZASSERT_TRUE(test) \
     do { \
         if ( !(test) ) { \
-            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** \nSelf: \"%@\"", self]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Assertion **** \nSelf: \"%@\"", self) \
         } \
     } while(0)
 #else
@@ -138,7 +145,7 @@
 #define RZASSERT_FALSE(test) \
     do { \
         if ( (test) ) { \
-            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** \nSelf: \"%@\"", self]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Assertion **** \nSelf: \"%@\"", self) \
         } \
     } while(0)
 #else
@@ -157,7 +164,7 @@
 #if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_WITH_MESSAGE(message, ...) \
     do { \
-        [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self]; \
+        PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self) \
     } while(0)
 #else
 #define RZASSERT_WITH_MESSAGE(message, ...) \
@@ -169,7 +176,7 @@
 #if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_WITH_MESSAGE_LOG(expression, message, ...) \
     do { \
-        [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** %@ \nExpression: \"%@\" \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self]; \
+        PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Assertion **** %@ \nExpression: \"%@\" \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self) \
     } while(0)
 #else
 #define RZASSERT_WITH_MESSAGE_LOG(expression, message, ...) \
@@ -182,7 +189,7 @@
 #define RZASSERT_TRUE_WITH_MESSAGE(test, message, ...) \
     do { \
         if ( !(test) ) { \
-            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Assertion **** %@ \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], self) \
         } \
     } while(0)
 #else
@@ -196,7 +203,7 @@
 #define RZASSERT_TRUE_WITH_MESSAGE_LOG(test, expression, message, ...) \
     do { \
         if ( !(test) ) { \
-            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\", \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\", \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self) \
         } \
     } while(0)
 #else
@@ -210,7 +217,7 @@
 #define RZASSERT_TRUE_LOG(test, expression) \
     do { \
         if ( !(test) ) { \
-            [RZAssert logMessageWithFormat:@"**** Unexpected Assertion **** \nExpression \"%@\" \nSelf: \"%@\"", expression, self]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Assertion **** \nExpression \"%@\" \nSelf: \"%@\"", expression, self) \
         } \
     } while(0)
 #else
@@ -236,7 +243,7 @@
 #define RZASSERT_EQUAL_OBJECT_POINTERS(x, y) \
     do { \
         if ( (x) != (y) ) { \
-            [RZAssert logMessageWithFormat:@"**** Object Pointers Unexpectedly Unequal **** \nReason: Left: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class])]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Object Pointers Unexpectedly Unequal **** \nReason: Left: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class])) \
         } \
     } while(0)
 #else
@@ -266,7 +273,7 @@
 #define RZASSERT_EQUAL_OBJECTS(x, y) \
     do { \
         if ( !( (!(x) && !(y)) || [(x) isEqual:(y)] ) ) { \
-            [RZAssert logMessageWithFormat:@"**** Objects Unexpectedly Unequal **** \nLeft: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class])]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Objects Unexpectedly Unequal **** \nLeft: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class])) \
         } \
     } while(0)
 #else
@@ -290,7 +297,7 @@
 #define RZASSERT_EQUAL_STRINGS(x, y) \
     do { \
         if ( !( (!(x) && !(y)) || [(x) isEqualToString:(y)] ) ) { \
-            [RZAssert logMessageWithFormat:@"**** Strings Unexpectedly Unequal **** \nLeft: \"%@\"\nRight: \"%@\"", x, y]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Strings Unexpectedly Unequal **** \nLeft: \"%@\"\nRight: \"%@\"", x, y) \
         } \
     } while(0)
 #else
@@ -310,7 +317,7 @@
 #define RZASSERT_NONEMPTY_STRING(string) \
     do { \
         if ( !( (string) != nil && [(string) isKindOfClass:[NSString class]] && [(string) length] > 0 ) ) { \
-            [RZAssert logMessageWithFormat:@"**** Unexpected Nil, Wrong Class, or Empty String **** \nReason: Expected non-empty string but got: \"%@\" \nSelf: \"%@\"", string, self]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Unexpected Nil, Wrong Class, or Empty String **** \nReason: Expected non-empty string but got: \"%@\" \nSelf: \"%@\"", string, self) \
         } \
     } while(0)
 #else
@@ -334,7 +341,7 @@
 #define RZASSERT_KINDOF(object, testClass) \
     do { \
         if ( ![(object) isKindOfClass:testClass] ) { \
-            [RZAssert logMessageWithFormat:@"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])) \
         } \
     } while(0)
 #else
@@ -355,7 +362,7 @@
 #define RZCASSERT_KINDOF(object, testClass) \
     do { \
         if ( ![(object) isKindOfClass:testClass] ) { \
-            [RZAssert logMessageWithFormat:@"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])) \
         } \
     } while(0)
 #else
@@ -376,7 +383,7 @@
 #define RZASSERT_KINDOF_OR_NIL(object, testClass) \
     do { \
         if ( !([(object) isKindOfClass:testClass] || (object) == nil) ) { \
-            [RZAssert logMessageWithFormat:@"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass(testClass), object, NSStringFromClass([object class])) \
         } \
     } while(0)
 #else
@@ -397,7 +404,7 @@
 #define RZASSERT_CONFORMS_PROTOCOL(object, protocol) \
     do { \
         if ( ![(object) conformsToProtocol:protocol] ) { \
-            [RZAssert logMessageWithFormat:@"**** Object Unexpectedly Doesn't Conform to Protocol **** \nReason: Expected object: \"%@\" of class \"%@\" to conform to protocol \"%@\", but it does not.", object, NSStringFromClass([object class]), NSStringFromProtocol(protocol)]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Object Unexpectedly Doesn't Conform to Protocol **** \nReason: Expected object: \"%@\" of class \"%@\" to conform to protocol \"%@\", but it does not.", object, NSStringFromClass([object class]), NSStringFromProtocol(protocol)) \
         } \
     } while(0)
 #else
@@ -418,7 +425,7 @@
 #define RZASSERT_CLASS_SUBCLASS_OF_CLASS(subclass, parentClass) \
     do { \
         if ( ![(subclass) isSubclassOfClass:(parentClass)] ) { \
-            [RZAssert logMessageWithFormat:@"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", subclass, parentClass]; \
+            PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", subclass, parentClass) \
         } \
     } while(0)
 #else
@@ -441,7 +448,7 @@
 #if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_SUBCLASSES_MUST_OVERRIDE \
     do { \
-        [RZAssert logMessageWithFormat:@"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd)]; \
+        PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Subclass Responsibility Assertion **** \nReason: Subclasses of %@ MUST override this method: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd)) \
     } while(0)
 #else
 #define RZASSERT_SUBCLASSES_MUST_OVERRIDE \
@@ -460,7 +467,7 @@
 #if defined(NS_BLOCK_ASSERTIONS)
 #define RZASSERT_SHOULD_NEVER_GET_HERE \
     do { \
-        [RZAssert logMessageWithFormat:@"**** Assertion: Should Never Get Here **** \nSelf: \"%@\"", self]; \
+        PRETTY_LOG_MESSAGE_WITH_FORMAT(@"**** Assertion: Should Never Get Here **** \nSelf: \"%@\"", self) \
     } while(0)
 #else
 #define RZASSERT_SHOULD_NEVER_GET_HERE \
