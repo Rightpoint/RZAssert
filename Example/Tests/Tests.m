@@ -363,7 +363,7 @@ describe(@"RZCASSERT_KINDOF works", ^{
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
             RZCASSERT_KINDOF(kNonEmptyString, [NSString class]);
-        }));
+        })).to.beFalsy();
     });
 
 });
