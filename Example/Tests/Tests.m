@@ -366,6 +366,12 @@ describe(@"RZCASSERT_KINDOF works", ^{
         })).to.beFalsy();
     });
 
+    it(@"handles non-matching class correctly", ^{
+        expect(testAssertionWithBlock(^{
+            RZCASSERT_KINDOF(kNonEmptyString, [NSNumber class]);
+        })).to.beTruthy();
+    });
+    
 });
 
 describe(@"RZASSERT_KINDOF_OR_NIL works", ^{
