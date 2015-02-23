@@ -52,13 +52,20 @@
 
 + (void)configureWithLoggingHandler:(void(^)(NSString *message))loggingHandler
 {
-    NSParameterAssert(loggingHandler);
+    if ( !loggingHandler ) {
+        // using NSAssert here would be too meta
+        [NSException raise:NSInvalidArgumentException format:@"%s: loggingHandler must not be nil", __PRETTY_FUNCTION__];
+    }
+
     [[self sharedInstance] setLoggingHandler:loggingHandler];
 }
 
 + (void)logMessageWithFormat:(NSString *)format, ...
 {
-    NSParameterAssert(format);
+    if ( !format ) {
+        // using NSAssert here would be too meta
+        [NSException raise:NSInvalidArgumentException format:@"%s: format must not be nil", __PRETTY_FUNCTION__];
+    }
 
     va_list args;
     va_start(args, format);
