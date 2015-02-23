@@ -428,14 +428,6 @@
 #endif
 
 /**
- *  Alias for RZASSERT_EQUAL_OBJECT_POINTERS.
- *
- */
-
-#define RZASSERT_EQUAL  RZASSERT_EQUAL_OBJECT_POINTERS
-#define RZCASSERT_EQUAL RZCASSERT_EQUAL_OBJECT_POINTERS
-
-/**
  *  Assert that x and y are nonequal objects. Uses -isEqual: to determine equality.
  *
  *  @param x     An object.
