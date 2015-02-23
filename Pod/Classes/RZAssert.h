@@ -50,7 +50,7 @@
 
 #define PRETTY_LOG_MESSAGE_WITH_FORMAT(format, ...) \
     do { \
-        [RZAssert logMessageWithFormat:[NSString stringWithFormat:@"**** Assertion failsure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, [NSString stringWithFormat:(format), ##__VA_ARGS__]]]; \
+        [RZAssert logMessageWithFormat:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, [NSString stringWithFormat:(format), ##__VA_ARGS__]]]; \
     } while(0);
 
 #pragma mark - Basic Assertions
