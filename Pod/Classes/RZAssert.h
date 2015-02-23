@@ -44,7 +44,7 @@
 
 
 /**
- *  Raise an exception if object is not equal to nil. Return void.
+ *  Raise an exception if object is not equal to nil.
  *
  *  @param object     An object instance to compare with nil.
  */
@@ -65,7 +65,7 @@
 
 
 /**
- *  Raise an exception if object is equal to nil. Return void.
+ *  Raise an exception if object is equal to nil.
  *
  *  @param object     An object instance to compare with nil.
  */
@@ -86,7 +86,7 @@
 
 
 /**
- *  Raise an exception. Return void.
+ *  Raise an exception.
  */
 
 #if defined(NS_BLOCK_ASSERTIONS)
@@ -102,7 +102,7 @@
 #endif
 
 /**
- *  Raise an exception if object evaulates to 0. Return void.
+ *  Raise an exception if object evaulates to 0.
  *
  *  @param object     An object instance to compare with 0.
  */
@@ -122,7 +122,7 @@
 #endif
 
 /**
- *  Raise an exception if object evaluates to 1. Return void.
+ *  Raise an exception if object evaluates to 1.
  *
  *  @param object     An object instance to compare with 1.
  */
@@ -142,7 +142,7 @@
 #endif
 
 /**
- *  Raise an exception. Return void.
+ *  Raise an exception.
  *
  *  @param message     A printf-style format string that describes the failure condition.
  */
@@ -219,7 +219,7 @@
 
 
 /**
- *  Raise an exception if x and y are not equal object pointers. Return void.
+ *  Raise an exception if x and y are not equal object pointers.
  *
  *  @param x     An object instance.
  *  @param y     An object instance.
@@ -249,7 +249,7 @@
 
 
 /**
- *  Raise an exception if x and y are not equal. Return void.
+ *  Raise an exception if x and y are not equal.
  *
  *  @param x     An object instance.
  *  @param y     An object instance.
@@ -273,7 +273,7 @@
 
 
 /**
- *  Raise an exception if x and y are not equal object pointers. Return void.
+ *  Raise an exception if x and y are not equal object pointers.
  *
  *  @param x     An NSString instance.
  *  @param y     An NSString instance.
@@ -294,7 +294,7 @@
 #endif
 
 /**
- *  Raise an exception if string is @"". Return void.
+ *  Raise an exception if string is @"".
  *
  *  @param string An NSString instance.
  */
@@ -317,7 +317,7 @@
 
 
 /**
- *  Raise an exception if object is not an instance of testClass. Return void.
+ *  Raise an exception if object is not an instance of testClass.
  *
  *  @param object        An object instance.
  *  @param testClass     A class.
@@ -338,7 +338,7 @@
 #endif
 
 /**
- *  Raise an exception if object is not an instance of testClass. Return void.
+ *  Raise an exception if object is not an instance of testClass.
  *
  *  @param object        An object instance.
  *  @param testClass     A class.
@@ -359,8 +359,7 @@
 #endif
 
 /**
- *  Raise an exception if object is not an instance of testClass, or is not nil. 
- *  Return void.
+ *  Raise an exception if object is not an instance of testClass, or is not nil.
  *
  *  @param object        An object instance.
  *  @param testClass     A class.
@@ -381,7 +380,7 @@
 #endif
 
 /**
- *  Raise an exception if object's class does not conform to protocol. Return void.
+ *  Raise an exception if object's class does not conform to protocol.
  *
  *  @param object        An object instance.
  *  @param testClass     The class to test @c object against.
@@ -402,8 +401,7 @@
 #endif
 
 /**
- *  Raise an exception if object is not a subclass of testClass, or is not nil. 
- *  Return void.
+ *  Raise an exception if object is not a subclass of testClass, or is not nil.
  *
  *  @param subclass        A class.
  *  @param parentClass     A class.
@@ -427,7 +425,7 @@
 
 
 /**
- *  Raise an exception. Return void. 
+ *  Raise an exception.
  *
  * Place RZASSERT_SUBCLASSES_MUST_OVERRIDE in a superclass method that would
  * otherwise be left empty
@@ -448,7 +446,7 @@
 // Should-never-get-here
 
 /**
- *  Raise an exception. Return void. 
+ *  Raise an exception.
  *
  */
 
