@@ -278,7 +278,7 @@
 #else
 #define RZCASSERT_WITH_MESSAGE_LOG(expression, message, ...) \
     do { \
-        NSCAssert(NO, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression,); \
+        NSCAssert(NO, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression); \
     } while(0)
 #endif
 
