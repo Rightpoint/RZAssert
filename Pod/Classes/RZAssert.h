@@ -362,8 +362,8 @@
  *  Raise an exception if object is not an instance of testClass, or is not nil. 
  *  Return void.
  *
- *  @param x     An object instance.
- *  @param y     A class.
+ *  @param object        An object instance.
+ *  @param testClass     A class.
  */
 
 #if defined(NS_BLOCK_ASSERTIONS)
@@ -384,7 +384,7 @@
  *  Raise an exception if object's class does not conform to protocol. Return void.
  *
  *  @param object        An object instance.
- *  @param testClass     ????????????.
+ *  @param testClass     The class to test @c object against.
  */
 
 #if defined(NS_BLOCK_ASSERTIONS)
