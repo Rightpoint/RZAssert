@@ -30,8 +30,18 @@
 
 @interface RZAssert : NSObject
 
+/**
+ *  Configures RZAssert to log using a custom handler. This block is run only when @c NS_BLOCK_ASSERTIONS is defined.
+ *
+ *  @param loggingHandler The block to run when an assertion condition is encountered, but assertions are disabled.
+ */
 + (void)configureWithLoggingHandler:(void(^)(NSString *message))loggingHandler;
 
+/**
+ *  Logs a message using the RZAssert logging handler. For private use only.
+ *
+ *  @param format The format string and parameters to log.
+ */
 + (void)logMessageWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1, 2);
 
 @end
