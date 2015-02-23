@@ -72,7 +72,6 @@ static BOOL testLoggingAssertionWithBlock(LoggingAssertionBlock loggingBlock)
     return worked;
 }
 
-
 SpecBegin(RZAssert)
 
 describe(@"RZASSERT_NIL works", ^{
