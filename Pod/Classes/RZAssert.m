@@ -32,8 +32,6 @@
 
 @property (copy, nonatomic) void (^loggingHandler)(NSString *message);
 
-+ (instancetype)sharedInstance;
-
 @end
 
 @implementation RZAssert
