@@ -436,7 +436,7 @@ describe(@"RZCASSERT_TRUE_LOG works", ^{
     
 });
 
-describe(@"RZASSERT_EQUAL_OBJECT_POINTERS worked", ^{
+describe(@"RZASSERT_EQUAL_OBJECT_POINTERS works", ^{
 
     it(@"handles nil correcty", ^{
         expect(testAssertionWithBlock(^{
@@ -452,7 +452,7 @@ describe(@"RZASSERT_EQUAL_OBJECT_POINTERS worked", ^{
 
 });
 
-describe(@"RZCASSERT_EQUAL_OBJECT_POINTERS worked", ^{
+describe(@"RZCASSERT_EQUAL_OBJECT_POINTERS works", ^{
 
     it(@"handles nil correcty", ^{
         expect(testAssertionWithBlock(^{
@@ -468,7 +468,7 @@ describe(@"RZCASSERT_EQUAL_OBJECT_POINTERS worked", ^{
     
 });
 
-describe(@"RZASSERT_EQUAL_OBJECTS", ^{
+describe(@"RZASSERT_EQUAL_OBJECTS works", ^{
 
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
@@ -495,7 +495,7 @@ describe(@"RZASSERT_EQUAL_OBJECTS", ^{
 
 });
 
-describe(@"RZCASSERT_EQUAL_OBJECTS", ^{
+describe(@"RZCASSERT_EQUAL_OBJECTS works", ^{
 
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
@@ -522,7 +522,7 @@ describe(@"RZCASSERT_EQUAL_OBJECTS", ^{
     
 });
 
-describe(@"RZASSERT_EQUAL_STRINGS", ^{
+describe(@"RZASSERT_EQUAL_STRINGS works", ^{
 
     it(@"handles equal strings correctly", ^{
         expect(testAssertionWithBlock(^{
@@ -538,7 +538,7 @@ describe(@"RZASSERT_EQUAL_STRINGS", ^{
 
 });
 
-describe(@"RZCASSERT_EQUAL_STRINGS", ^{
+describe(@"RZCASSERT_EQUAL_STRINGS works", ^{
 
     it(@"handles equal strings correctly", ^{
         expect(testAssertionWithBlock(^{
