@@ -25,23 +25,23 @@ static BOOL testAssertionWithBlock(AssertionBlock block)
         loggedMessage = message;
     }];
 
-    BOOL worked = NO;
+    BOOL assertedOrLogged = NO;
 
 #if defined(NS_BLOCK_ASSERTIONS)
     block();
     if ( loggedMessage ) {
-        worked = YES;
+        assertedOrLogged = YES;
     }
 #else
     @try {
         block();
     }
     @catch (NSException *e) {
-        worked = YES;
+        assertedOrLogged = YES;
     }
 #endif
 
-    return worked;
+    return assertedOrLogged;
 }
 
 static BOOL testLoggingAssertionWithBlock(LoggingAssertionBlock loggingBlock)
@@ -53,23 +53,23 @@ static BOOL testLoggingAssertionWithBlock(LoggingAssertionBlock loggingBlock)
         loggedMessage = message;
     }];
 
-    BOOL worked = NO;
+    BOOL assertedOrLogged = NO;
 
 #if defined(NS_BLOCK_ASSERTIONS)
     loggingBlock(kNonEmptyString);
     if ( [loggedMessage containsString:kNonEmptyString] ) {
-        worked = YES;
+        assertedOrLogged = YES;
     }
 #else
     @try {
         loggingBlock(kNonEmptyString);
     }
     @catch (NSException *e) {
-        worked = ([e.description rangeOfString:kNonEmptyString].location != NSNotFound);
+        assertedOrLogged = ([e.description rangeOfString:kNonEmptyString].location != NSNotFound);
     }
 #endif
 
-    return worked;
+    return assertedOrLogged;
 }
 
 SpecBegin(RZAssert)
