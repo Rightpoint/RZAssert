@@ -103,7 +103,7 @@ describe(@"RZCASSERT_NIL works", ^{
             RZCASSERT_NIL(kNonEmptyString);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_NOT_NIL works", ^{
@@ -153,7 +153,7 @@ describe(@"RZCASSERT_ALWAYS works", ^{
             RZCASSERT_ALWAYS;
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_TRUE works", ^{
@@ -209,7 +209,7 @@ describe(@"RZCASSERT_TRUE works", ^{
             RZCASSERT_TRUE(YES);
         })).to.beFalsy();
     });
-    
+
 });
 
 describe(@"RZASSERT_FALSE works", ^{
@@ -261,7 +261,7 @@ describe(@"RZCASSERT_FALSE works", ^{
             RZCASSERT_FALSE(YES);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_WITH_MESSAGE works", ^{
@@ -283,7 +283,7 @@ describe(@"RZCASSERT_WITH_MESSAGE works", ^{
             RZCASSERT_WITH_MESSAGE(@"%@", message);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_WITH_MESSAGE_LOG works", ^{
@@ -345,7 +345,7 @@ describe(@"RZCASSERT_TRUE_WITH_MESSAGE works", ^{
             RZCASSERT_TRUE_WITH_MESSAGE(NO, @"%@", message);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
@@ -389,7 +389,7 @@ describe(@"RZCASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
             RZCASSERT_TRUE_WITH_MESSAGE_LOG(YES, kNonEmptyString, kTestMessage);
         })).to.beFalsy();
     });
-    
+
 });
 
 describe(@"RZASSERT_TRUE_LOG works", ^{
@@ -433,7 +433,7 @@ describe(@"RZCASSERT_TRUE_LOG works", ^{
             RZCASSERT_TRUE_LOG(NO, message);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_EQUAL_OBJECT_POINTERS works", ^{
@@ -465,7 +465,7 @@ describe(@"RZCASSERT_EQUAL_OBJECT_POINTERS works", ^{
             RZCASSERT_EQUAL_OBJECT_POINTERS(kTestMessage, kNonEmptyString);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_EQUAL_OBJECTS works", ^{
@@ -519,7 +519,7 @@ describe(@"RZCASSERT_EQUAL_OBJECTS works", ^{
             })).to.beFalsy();
         }));
     });
-    
+
 });
 
 describe(@"RZASSERT_EQUAL_STRINGS works", ^{
@@ -551,7 +551,7 @@ describe(@"RZCASSERT_EQUAL_STRINGS works", ^{
             RZCASSERT_EQUAL_STRINGS(kNonEmptyString, kTestMessage);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_NONEMPTY_STRING works", ^{
@@ -583,7 +583,7 @@ describe(@"RZCASSERT_NONEMPTY_STRING works", ^{
             RZCASSERT_NONEMPTY_STRING(kNonEmptyString);
         })).to.beFalsy();
     });
-    
+
 });
 
 describe(@"RZASSERT_KINDOF works", ^{
@@ -627,7 +627,7 @@ describe(@"RZCASSERT_KINDOF works", ^{
             RZCASSERT_KINDOF(kNonEmptyString, [NSNumber class]);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_KINDOF_OR_NIL works", ^{
@@ -671,7 +671,7 @@ describe(@"RZCASSERT_KINDOF_OR_NIL works", ^{
             RZCASSERT_KINDOF_OR_NIL(kNonEmptyString, [NSNumber class]);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_CONFORMS_PROTOCOL works", ^{
@@ -715,7 +715,7 @@ describe(@"RZCASSERT_CONFORMS_PROTOCOL works", ^{
             RZCASSERT_CONFORMS_PROTOCOL(kNonEmptyString, @protocol(NSObject));
         })).to.beFalsy();
     });
-    
+
 });
 
 describe(@"RZASSERT_CLASS_SUBCLASS_OF_CLASS works", ^{
@@ -771,7 +771,7 @@ describe(@"RZCASSERT_CLASS_SUBCLASS_OF_CLASS works", ^{
             RZCASSERT_CLASS_SUBCLASS_OF_CLASS([kNonEmptyString class], [NSArray class]);
         })).to.beTruthy();
     });
-    
+
 });
 
 describe(@"RZASSERT_SUBCLASSES_MUST_OVERRIDE works", ^{
@@ -781,21 +781,21 @@ describe(@"RZASSERT_SUBCLASSES_MUST_OVERRIDE works", ^{
             RZASSERT_SUBCLASSES_MUST_OVERRIDE;
         })).to.beTruthy();
     });
-
+    
 });
 
 describe(@"RZASSERT_SHOULD_NEVER_GET_HERE works", ^{
-
+    
     it(@"always throws an exception", ^{
         expect(testAssertionWithBlock(^{
             RZASSERT_SHOULD_NEVER_GET_HERE;
         })).to.beTruthy();
     });
-
+    
 });
 
 describe(@"RZCASSERT_SHOULD_NEVER_GET_HERE works", ^{
-
+    
     it(@"always throws an exception", ^{
         expect(testAssertionWithBlock(^{
             RZCASSERT_SHOULD_NEVER_GET_HERE;
