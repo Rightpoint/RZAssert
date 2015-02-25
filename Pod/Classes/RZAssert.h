@@ -212,7 +212,7 @@
     } while(0)
 
 /**
- *  Asserrt that a value is truthy (i.e. nonzero), and log a message and the result of an expression.
+ *  Assert that a value is truthy (i.e. nonzero), and log a message and the result of an expression.
  *
  *  @param test       The value to test.
  *  @param expression The expression whose result you want to print. Should evaluate to a %@-printable value (an object or nil).
