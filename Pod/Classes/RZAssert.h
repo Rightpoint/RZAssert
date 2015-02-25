@@ -49,6 +49,13 @@
  */
 + (void)logMessageWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1, 2);
 
+/**
+ *  Whether or not RZAssert is configured with a logger. Used to short-circuit the assertion macros, so they don’t do (much) extra work when assertions are disabled and a logger is not configured.
+ *
+ *  @return @c YES if there is a logging handler, otherwise @c NO.
+ */
++ (BOOL)hasLogger;
+
 @end
 
 #pragma mark - Helpers
@@ -57,8 +64,10 @@
 #if defined(NS_BLOCK_ASSERTIONS)
     #define RZASSERT_BASE(test, format, ...) \
     do { \
-        if ( !(test) ) { \
-            [RZAssert logMessageWithFormat:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
+        if ( [RZAssert hasLogger] ) { \
+            if ( !(test) ) { \
+                [RZAssert logMessageWithFormat:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
+            } \
         } \
     } while(0);
 #else
@@ -72,8 +81,10 @@
 #if defined(NS_BLOCK_ASSERTIONS)
     #define RZCASSERT_BASE(test, format, ...) \
     do { \
-        if ( !(test) ) { \
-            [RZAssert logMessageWithFormat:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
+        if ( [RZAssert hasLogger] ) { \
+            if ( !(test) ) { \
+                [RZAssert logMessageWithFormat:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
+            } \
         } \
     } while(0);
 #else

@@ -84,4 +84,9 @@
     }
 }
 
++ (BOOL)hasLogger
+{
+    return ([[self sharedInstance] loggingHandler] != nil);
+}
+
 @end

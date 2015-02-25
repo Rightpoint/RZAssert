@@ -90,6 +90,41 @@ describe(@"RZASSERT_NIL works", ^{
 
 });
 
+describe(@"setting a nil logging handler", ^{
+
+    it(@"throws an exception", ^{
+        BOOL excepted = NO;
+
+        @try {
+            [RZAssert configureWithLoggingHandler:nil];
+        }
+        @catch (NSException *e) {
+            excepted = YES;
+        }
+
+        expect(excepted).to.beTruthy();
+    });
+
+});
+
+describe(@"+removeLoggingHandler works.", ^{
+
+    it(@"is a no-op when there is no logging handler", ^{
+        id testThing = nil;
+
+        [RZAssert removeLoggingHandler];
+
+        // Make sure the assignment that is passed in does not run when there is no logging handler configured.
+        // We only care about this case when assertions are disabled.
+#if defined(NS_BLOCK_ASSERTIONS)
+        RZASSERT_NOT_NIL((testThing = kNonEmptyString));
+#endif
+        expect(testThing).to.beNil();
+
+    });
+
+});
+
 describe(@"RZCASSERT_NIL works", ^{
 
     it(@"handles nil correctly", ^{
