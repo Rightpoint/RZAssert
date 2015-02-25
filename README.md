@@ -68,7 +68,7 @@ RZAssert fixes this by providing a facility to run custom logging code in produc
 }];
 ```
 
-Once you have configured a logging handler blog, if the code is compiled with assertions disabled, all your calls to the RZAssert macros will automatically log to your own logging handler instead. This is great to use with a breadcrumb system, so you can get clues about what happened that may have led to a later crash.
+Once you have configured a logging handler block, if the code is compiled with assertions disabled, all your calls to the RZAssert macros will automatically log to your own logging handler instead. This is great to use with a breadcrumb system, so you can get clues about what happened that may have led to a later crash.
 
 ### Warning About `NS_BLOCK_ASSERTIONS`
 You may have some code like this:
