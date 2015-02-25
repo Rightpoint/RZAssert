@@ -54,10 +54,15 @@
 {
     if ( !loggingHandler ) {
         // using NSAssert here would be too meta
-        [NSException raise:NSInvalidArgumentException format:@"%s: loggingHandler must not be nil", __PRETTY_FUNCTION__];
+        [NSException raise:NSInvalidArgumentException format:@"%s: loggingHandler must not be nil. If you want to remove the logging handler, use +removeLoggingHandler instead.", __PRETTY_FUNCTION__];
     }
 
     [[self sharedInstance] setLoggingHandler:loggingHandler];
+}
+
++ (void)removeLoggingHandler
+{
+    [[self sharedInstance] setLoggingHandler:nil];
 }
 
 + (void)logMessageWithFormat:(NSString *)format, ...

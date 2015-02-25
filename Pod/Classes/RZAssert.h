@@ -38,6 +38,11 @@
 + (void)configureWithLoggingHandler:(void(^)(NSString *message))loggingHandler;
 
 /**
+ *  Removes the logging handler.
+ */
++ (void)removeLoggingHandler;
+
+/**
  *  Logs a message using the RZAssert logging handler. For private use only.
  *
  *  @param format The format string and parameters to log.
