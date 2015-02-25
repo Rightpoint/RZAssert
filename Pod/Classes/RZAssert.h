@@ -420,30 +420,3 @@
     do { \
         RZCASSERT_BASE( NO, @"**** Assertion: Should Never Get Here ****" ) \
     } while(0)
-
-#pragma mark - Block Assertions
-
-/**
- *  NS_BLOCK_ASSERTIONS is defined only in the Release config. It refers to blocking
- *  assertion from being added to released code, rather than assertions relating to 
- *  Objective-C blocks.
- *
- */
-
-#if !defined(NS_BLOCK_ASSERTIONS)
-
-#define RZASSERT_BLOCK(condition, desc, ...) \
-do { \
-if ( !(condition) ) { \
-    [[NSAssertionHandler currentHandler] handleFailureInFunction:NSStringFromSelector(_cmd) \
-                                                            file:[NSString stringWithUTF8String:__FILE__] \
-                                                      lineNumber:__LINE__ \
-                                                     description:(desc), ##__VA_ARGS__]; \
-    }\
-} while(0);
-
-#else // NS_BLOCK_ASSERTIONS defined
-
-#define RZASSERT_BLOCK(condition, desc, ...)
-
-#endif
