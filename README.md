@@ -80,7 +80,7 @@ You may have some code like this:
 #endif
 ```
 
-This is to avoid the compiler complaining that `foo` is unused when you compile with assertions disabled. However, if you want your RZAssert calls to be turned into logs in release builds, don’t wrap any assertions in checks for `NS_BLOCK_ASSERTIONS`, because you always want them to run.
+This is to avoid the compiler complaining that `foo` is unused when you compile with assertions disabled. However, if you want your RZAssert calls to be turned into logs in release builds, don’t wrap any assertions in checks for `NS_BLOCK_ASSERTIONS`, because you always want them to run. Save `NS_BLOCK_ASSERTIONS` checks for expensive tests that you really only want to run at debug time.
 
 ## Usage
 
