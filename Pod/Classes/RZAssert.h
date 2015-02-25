@@ -33,7 +33,7 @@
 /**
  *  Configures RZAssert to log using a custom handler. This block is run only when @c NS_BLOCK_ASSERTIONS is defined.
  *
- *  @param loggingHandler The block to run when an assertion condition is encountered, but assertions are disabled.
+ *  @param loggingHandler The block to run when an assertion condition is encountered, but assertions are disabled. The block is called from the same thread that +configureWithLoggingHandler: was called from, so you are responsible for making sure your logging code is thread-safe.
  */
 + (void)configureWithLoggingHandler:(void(^)(NSString *message))loggingHandler;
 
