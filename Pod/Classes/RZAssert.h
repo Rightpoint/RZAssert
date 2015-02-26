@@ -45,9 +45,9 @@
 /**
  *  Logs a message using the RZAssert logging handler. For private use only.
  *
- *  @param format The format string and parameters to log.
+ *  @param message The message to log.
  */
-+ (void)logMessageWithFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1, 2);
++ (void)logMessage:(NSString *)message;
 
 /**
  *  Whether or not RZAssert is configured with a logger. Used to short-circuit the assertion macros, so they don’t do (much) extra work when assertions are disabled and a logger is not configured.
@@ -66,7 +66,7 @@
     do { \
         if ( [RZAssert hasLogger] ) { \
             if ( !(test) ) { \
-                [RZAssert logMessageWithFormat:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
+                [RZAssert logMessage:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
             } \
         } \
     } while(0);
@@ -83,7 +83,7 @@
     do { \
         if ( [RZAssert hasLogger] ) { \
             if ( !(test) ) { \
-                [RZAssert logMessageWithFormat:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
+                [RZAssert logMessage:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
             } \
         } \
     } while(0);
