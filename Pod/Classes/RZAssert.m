@@ -68,7 +68,7 @@
 + (void)logMessage:(NSString *)message
 {
     if ( !message ) {
-        // using NSAssert here would be too meta
+        // Using NSAssert here would be too meta (and would not assert if assertions are disabled).
         [NSException raise:NSInvalidArgumentException format:@"%s: message must not be nil", __PRETTY_FUNCTION__];
     }
 
