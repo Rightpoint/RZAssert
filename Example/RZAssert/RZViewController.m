@@ -8,7 +8,7 @@
 
 #import "RZViewController.h"
 #import "RZViewControllerSubclass.h"
-#import <RZAssert.h>
+#import <RZAssert/RZAssert.h>
 
 @interface RZViewController ()
 
@@ -30,9 +30,7 @@
 
     RZViewControllerSubclass *rzViewControllerSubclass = [[RZViewControllerSubclass alloc] init];
 
-    if ( rzViewControllerSubclass ) {
-        NSLog(@"Calling assertImplementedBySubclass on an instance of RZViewController raises an exception.");
-    }
+    [rzViewControllerSubclass methodThatSubclassesMustOverride];
 }
 
 #pragma mark - RZASSERT_TRUE
@@ -72,9 +70,9 @@
 
 #pragma mark - RZASSERT_SUBCLASSES_MUST_OVERRIDE
 
-- (void)assertImplementedBySubclass
+- (void)methodThatSubclassesMustOverride
 {
-    RZASSERT_SUBCLASSES_MUST_OVERRIDE
+    RZASSERT_SUBCLASSES_MUST_OVERRIDE;
 }
 
 #pragma mark - Actions
@@ -112,6 +110,11 @@
 - (IBAction)throwAssertionRZAssertShouldNeverGetHere:(id)sender
 {
     RZASSERT_SHOULD_NEVER_GET_HERE;
+}
+
+- (IBAction)throwEqualObjectPointerAssertion:(id)sender
+{
+    RZASSERT_EQUAL_OBJECT_POINTERS(self, sender);
 }
 
 @end
