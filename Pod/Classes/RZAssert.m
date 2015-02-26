@@ -65,22 +65,17 @@
     [[self sharedInstance] setLoggingHandler:nil];
 }
 
-+ (void)logMessageWithFormat:(NSString *)format, ...
++ (void)logMessage:(NSString *)message
 {
-    if ( !format ) {
+    if ( !message ) {
         // using NSAssert here would be too meta
-        [NSException raise:NSInvalidArgumentException format:@"%s: format must not be nil", __PRETTY_FUNCTION__];
+        [NSException raise:NSInvalidArgumentException format:@"%s: message must not be nil", __PRETTY_FUNCTION__];
     }
-
-    va_list args;
-    va_start(args, format);
-    NSString *formattedString = [[NSString alloc] initWithFormat:format arguments:args];
-    va_end(args);
 
     void(^loggingHandler)(NSString *) = [[self sharedInstance] loggingHandler];
     
     if ( loggingHandler ) {
-        loggingHandler(formattedString);
+        loggingHandler(message);
     }
 }
 
