@@ -7,7 +7,17 @@
 //
 
 #import "RZAppDelegate.h"
+#import <RZAssert/RZAssert.h>
 
 @implementation RZAppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [RZAssert configureWithLoggingHandler:^(NSString *message) {
+        NSLog(@"simulating remote logging event: \n%@", message);
+    }];
+
+    return YES;
+}
 
 @end

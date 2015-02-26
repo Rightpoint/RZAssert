@@ -10,4 +10,6 @@
 
 @interface RZViewController : UIViewController
 
+- (void)methodThatSubclassesMustOverride;
+
 @end

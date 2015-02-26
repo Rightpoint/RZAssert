@@ -1,28 +1,20 @@
 PODS:
-  - Expecta (0.3.1)
-  - RZAssert (0.1.0)
-  - Specta (0.3.0.beta1)
+  - Expecta (0.3.2)
+  - RZAssert (1.0.0)
+  - Specta (0.3.2)
 
 DEPENDENCIES:
   - Expecta
   - RZAssert (from `../`)
-  - Specta (from `https://github.com/specta/specta.git`, tag `v0.3.0.beta1`)
+  - Specta
 
 EXTERNAL SOURCES:
   RZAssert:
     :path: ../
-  Specta:
-    :git: https://github.com/specta/specta.git
-    :tag: v0.3.0.beta1
-
-CHECKOUT OPTIONS:
-  Specta:
-    :git: https://github.com/specta/specta.git
-    :tag: v0.3.0.beta1
 
 SPEC CHECKSUMS:
-  Expecta: 03aabd0a89d8dea843baecb19a7fd7466a69a31d
-  RZAssert: 811357bc06ba59be9a3f8545c2a6635e3d83b5f0
-  Specta: 63e8ac8e07db6675c7096d37f77a266a1be4c02d
+  Expecta: ee641011fe10aa1855d487b40e4976dac50ec342
+  RZAssert: 6fd739b0a1330e203e5c5e2754002e1b0262c7ad
+  Specta: 698a58ffa5ec948327d3b92eab50ca58d7f4fbe8
 
 COCOAPODS: 0.35.0

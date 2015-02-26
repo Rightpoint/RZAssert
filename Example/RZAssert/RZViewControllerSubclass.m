@@ -8,25 +8,21 @@
 
 #import "RZViewControllerSubclass.h"
 
-@interface RZViewControllerSubclass ()
-
-@end
-
 @implementation RZViewControllerSubclass
 
 - (instancetype)init
 {
     self = [super init];
     if ( self ) {
-        [self assertImplementedBySubclass];
+        [self methodThatSubclassesMustOverride];
     }
 
     return self;
 }
 
-- (void)assertImplementedBySubclass
+- (void)methodThatSubclassesMustOverride
 {
-    NSLog(@"Implemented by RZViewControllerSubclass");
+    // If you delete this method, the base class will assert it gets to this line.
 }
 
 @end

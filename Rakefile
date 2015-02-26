@@ -3,6 +3,27 @@ WORKSPACE_PATH="Example/RZAssert.xcworkspace"
 TEST_SCHEME="RZAssertTests"
 
 #
+# Helpers
+#
+
+# run the provided command twice, with ENABLE_NS_ASSERTIONS set to NO and then to YES
+def run_xcodebuild_with_and_without_assertions(command)
+  assertion_string = " ENABLE_NS_ASSERTIONS=%s"
+  
+  # run WITHOUT assertions
+  sh(command.concat(assertion_string % ["NO"])) rescue nil
+  no_assertion_exit = $?.exitstatus
+  
+  # run WITH assertions
+  sh(command.concat(assertion_string % ["YES"])) rescue nil
+  assertion_exit = $?.exitstatus
+  
+  # fail if either command failed
+  exit_status = [no_assertion_exit, assertion_exit].max # 0 if both succeeded, else the exit status of one or both
+  return exit_status
+end
+
+#
 # Install
 #
 
@@ -30,8 +51,9 @@ end
 #
 
 task :test do
-  sh("xcodebuild -workspace '#{WORKSPACE_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator -destination 'name=iPhone 6' build test") rescue nil
-  exit $?.exitstatus
+  test_command = "xcodebuild -workspace '#{WORKSPACE_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator -destination 'name=iPhone 6' build test"
+  exit_status = run_xcodebuild_with_and_without_assertions(test_command)
+  exit exit_status
 end
 
 #
@@ -39,8 +61,9 @@ end
 #
 
 task :analyze do
-  sh("xcodebuild -workspace '#{WORKSPACE_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator analyze") rescue nil
-  exit $?.exitstatus
+  analyze_command = "xcodebuild -workspace '#{WORKSPACE_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator analyze"
+  exit_status = run_xcodebuild_with_and_without_assertions(analyze_command)
+  exit exit_status
 end
 
 #
