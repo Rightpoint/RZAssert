@@ -36,7 +36,7 @@ static BOOL testAssertionWithBlock(AssertionBlock block)
     @try {
         block();
     }
-    @catch (NSException *e) {
+    @catch (__unused NSException *e) {
         assertedOrLogged = YES;
     }
 #endif
@@ -98,7 +98,7 @@ describe(@"setting a nil logging handler", ^{
         @try {
             [RZAssert configureWithLoggingHandler:nil];
         }
-        @catch (NSException *e) {
+        @catch (__unused NSException *e) {
             excepted = YES;
         }
 
@@ -349,7 +349,7 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE works", ^{
 
     it(@"handles YES correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_TRUE_WITH_MESSAGE(YES, kTestMessage);
+            RZASSERT_TRUE_WITH_MESSAGE(YES, @"%@", kTestMessage);
         })).to.beFalsy();
     });
 
@@ -371,7 +371,7 @@ describe(@"RZCASSERT_TRUE_WITH_MESSAGE works", ^{
 
     it(@"handles YES correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZCASSERT_TRUE_WITH_MESSAGE(YES, kTestMessage);
+            RZCASSERT_TRUE_WITH_MESSAGE(YES, @"%@", kTestMessage);
         })).to.beFalsy();
     });
 
@@ -399,7 +399,7 @@ describe(@"RZASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
 
     it(@"handles YES correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZASSERT_TRUE_WITH_MESSAGE_LOG(YES, kNonEmptyString, kTestMessage);
+            RZASSERT_TRUE_WITH_MESSAGE_LOG(YES, kNonEmptyString, @"%@", kTestMessage);
         })).to.beFalsy();
     });
 
@@ -421,7 +421,7 @@ describe(@"RZCASSERT_TRUE_WITH_MESSAGE_LOG works", ^{
 
     it(@"handles YES correctly", ^{
         expect(testAssertionWithBlock(^{
-            RZCASSERT_TRUE_WITH_MESSAGE_LOG(YES, kNonEmptyString, kTestMessage);
+            RZCASSERT_TRUE_WITH_MESSAGE_LOG(YES, kNonEmptyString, @"%@", kTestMessage);
         })).to.beFalsy();
     });
 
