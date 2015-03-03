@@ -685,6 +685,12 @@ describe(@"RZASSERT_KINDOF_OR_NIL works", ^{
         })).to.beFalsy();
     });
 
+    it(@"handles classes correctly when you don’t explicitly call +class", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_KINDOF_OR_NIL(kNilString, NSObject);
+        })).to.beFalsy();
+    });
+
     it(@"handles non-nil values correctly", ^{
         expect(testAssertionWithBlock(^{
             RZASSERT_KINDOF_OR_NIL(kNonEmptyString, [NSString class]);
@@ -704,6 +710,12 @@ describe(@"RZCASSERT_KINDOF_OR_NIL works", ^{
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
             RZCASSERT_KINDOF_OR_NIL(kNilString, [NSObject class]);
+        })).to.beFalsy();
+    });
+
+    it(@"handles classes correctly when you don’t explicitly call +class", ^{
+        expect(testAssertionWithBlock(^{
+            RZCASSERT_KINDOF_OR_NIL(kNilString, NSObject);
         })).to.beFalsy();
     });
 
@@ -773,6 +785,12 @@ describe(@"RZASSERT_CLASS_SUBCLASS_OF_CLASS works", ^{
         })).to.beTruthy();
     });
 
+    it(@"handles classes correctly when you don’t explicitly call +class, or when you pass an object", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_CLASS_SUBCLASS_OF_CLASS(kNilString, NSObject);
+        })).to.beTruthy();
+    });
+
     it(@"handles non-subclasses correctly", ^{
         expect(testAssertionWithBlock(^{
             RZASSERT_CLASS_SUBCLASS_OF_CLASS([kNonEmptyString class], [NSNumber class]);
@@ -798,6 +816,12 @@ describe(@"RZCASSERT_CLASS_SUBCLASS_OF_CLASS works", ^{
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
             RZCASSERT_CLASS_SUBCLASS_OF_CLASS([kNilString class], [NSObject class]);
+        })).to.beTruthy();
+    });
+
+    it(@"handles classes correctly when you don’t explicitly call +class, or when you pass an object", ^{
+        expect(testAssertionWithBlock(^{
+            RZCASSERT_CLASS_SUBCLASS_OF_CLASS(kNilString, NSObject);
         })).to.beTruthy();
     });
 
