@@ -629,6 +629,12 @@ describe(@"RZASSERT_KINDOF works", ^{
         })).to.beTruthy();
     });
 
+    it(@"handles classes correctly when you don’t explicitly call +class", ^{
+        expect(testAssertionWithBlock(^{
+            RZASSERT_KINDOF(kNilString, NSObject);
+        })).to.beTruthy();
+    });
+
     it(@"handles non-nil value correctly", ^{
         expect(testAssertionWithBlock(^{
             RZASSERT_KINDOF(kNonEmptyString, [NSString class]);
@@ -648,6 +654,12 @@ describe(@"RZCASSERT_KINDOF works", ^{
     it(@"handles nil correctly", ^{
         expect(testAssertionWithBlock(^{
             RZCASSERT_KINDOF(kNilString, [NSObject class]);
+        })).to.beTruthy();
+    });
+
+    it(@"handles classes correctly when you don’t explicitly call +class", ^{
+        expect(testAssertionWithBlock(^{
+            RZCASSERT_KINDOF(kNilString, NSObject);
         })).to.beTruthy();
     });
 
