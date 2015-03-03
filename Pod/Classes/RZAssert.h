@@ -122,12 +122,12 @@
 
 #define RZASSERT_NOT_NIL(object) \
     do { \
-        RZASSERT_BASE( (object != nil), @"**** Unexpected Non-Nil Assertion **** \nExpected not nil, but " #object @" is nil \nSelf: \"%@\"", self ) \
+        RZASSERT_BASE( ((object) != nil), @"**** Unexpected Non-Nil Assertion **** \nExpected not nil, but " #object @" is nil \nSelf: \"%@\"", self ) \
     } while(0)
 
 #define RZCASSERT_NOT_NIL(object) \
     do { \
-        RZCASSERT_BASE( (object != nil), @"**** Unexpected Non-Nil Assertion **** \nExpected not nil, but " #object @" is nil" ) \
+        RZCASSERT_BASE( ((object) != nil), @"**** Unexpected Non-Nil Assertion **** \nExpected not nil, but " #object @" is nil" ) \
     } while(0)
 
 /**
@@ -201,12 +201,12 @@
 
 #define RZASSERT_WITH_MESSAGE_LOG(expression, message, ...) \
     do { \
-        RZASSERT_BASE( NO, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\" \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self ) \
+        RZASSERT_BASE( NO, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\" \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], (expression), self ) \
     } while(0)
 
 #define RZCASSERT_WITH_MESSAGE_LOG(expression, message, ...) \
     do { \
-        RZCASSERT_BASE( NO, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression ) \
+        RZCASSERT_BASE( NO, @"**** Unexpected Assertion **** %@ \nExpression: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], (expression) ) \
     } while(0)
 
 /**
@@ -237,12 +237,12 @@
 
 #define RZASSERT_TRUE_WITH_MESSAGE_LOG(test, expression, message, ...) \
     do { \
-        RZASSERT_BASE( (test), @"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\", \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression, self ) \
+        RZASSERT_BASE( (test), @"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\", \nSelf: \"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], (expression), self ) \
     } while(0)
 
 #define RZCASSERT_TRUE_WITH_MESSAGE_LOG(test, expression, message, ...) \
     do { \
-        RZCASSERT_BASE( (test), @"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], expression ) \
+        RZCASSERT_BASE( (test), @"**** Unexpected Assertion **** %@ \nReason: \nExpression:\"%@\"", [NSString stringWithFormat:message, ##__VA_ARGS__], (expression) ) \
     } while(0)
 
 /**
@@ -254,12 +254,12 @@
 
 #define RZASSERT_TRUE_LOG(test, expression) \
     do { \
-        RZASSERT_BASE( (test), @"**** Unexpected Assertion **** \nExpression \"%@\" \nSelf: \"%@\"", expression, self ) \
+        RZASSERT_BASE( (test), @"**** Unexpected Assertion **** \nExpression \"%@\" \nSelf: \"%@\"", (expression), self ) \
     } while(0)
 
 #define RZCASSERT_TRUE_LOG(test, expression) \
     do { \
-        RZCASSERT_BASE( (test), @"**** Unexpected Assertion **** \nExpression \"%@\"", expression ) \
+        RZCASSERT_BASE( (test), @"**** Unexpected Assertion **** \nExpression \"%@\"", (expression) ) \
     } while(0)
 
 # pragma mark - Higher-Level Assertions
@@ -275,12 +275,12 @@
 
 #define RZASSERT_EQUAL_OBJECT_POINTERS(x, y) \
     do { \
-        RZASSERT_BASE( ((x) == (y)), @"**** Object Pointers Unexpectedly Unequal **** \nReason: Left: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class]) ) \
+        RZASSERT_BASE( ((x) == (y)), @"**** Object Pointers Unexpectedly Unequal **** \nReason: Left: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", (x), NSStringFromClass([(x) class]), (y), NSStringFromClass([(y) class]) ) \
     } while(0)
 
 #define RZCASSERT_EQUAL_OBJECT_POINTERS(x, y) \
     do { \
-        RZCASSERT_BASE( ((x) == (y)), @"**** Object Pointers Unexpectedly Unequal **** \nReason: Left: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class]) ) \
+        RZCASSERT_BASE( ((x) == (y)), @"**** Object Pointers Unexpectedly Unequal **** \nReason: Left: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", (x), NSStringFromClass([(x) class]), (y), NSStringFromClass([(y) class]) ) \
     } while(0)
 
 /**
@@ -292,12 +292,12 @@
 
 #define RZASSERT_EQUAL_OBJECTS(x, y) \
     do { \
-        RZASSERT_BASE( ((!(x) && !(y)) || [(x) isEqual:(y)]), @"**** Objects Unexpectedly Unequal **** \nLeft: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class]) ) \
+        RZASSERT_BASE( ((!(x) && !(y)) || [(x) isEqual:(y)]), @"**** Objects Unexpectedly Unequal **** \nLeft: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", (x), NSStringFromClass([(x) class]), (y), NSStringFromClass([(y) class]) ) \
     } while(0)
 
 #define RZCASSERT_EQUAL_OBJECTS(x, y) \
     do { \
-        RZCASSERT_BASE( ((!(x) && !(y)) || [(x) isEqual:(y)]), @"**** Objects Unexpectedly Unequal **** \nLeft: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", x, NSStringFromClass([x class]), y, NSStringFromClass([y class]) ) \
+        RZCASSERT_BASE( ((!(x) && !(y)) || [(x) isEqual:(y)]), @"**** Objects Unexpectedly Unequal **** \nLeft: \"%@\" of class \"%@\", Right: \"%@\" of class \"%@\"", (x), NSStringFromClass([(x) class]), (y), NSStringFromClass([(y) class]) ) \
     } while(0)
 
 // String Assertions
@@ -311,12 +311,12 @@
 
 #define RZASSERT_EQUAL_STRINGS(x, y) \
     do { \
-        RZASSERT_BASE( ((!(x) && !(y)) || [(x) isEqualToString:(y)]), @"**** Strings Unexpectedly Unequal **** \nLeft: \"%@\"\nRight: \"%@\"", x, y ) \
+        RZASSERT_BASE( ((!(x) && !(y)) || [(x) isEqualToString:(y)]), @"**** Strings Unexpectedly Unequal **** \nLeft: \"%@\"\nRight: \"%@\"", (x), (y) ) \
     } while(0)
 
 #define RZCASSERT_EQUAL_STRINGS(x, y) \
     do { \
-        RZCASSERT_BASE( ((!(x) && !(y)) || [(x) isEqualToString:(y)]), @"**** Strings Unexpectedly Unequal **** \nLeft: \"%@\"\nRight: \"%@\"", x, y ) \
+        RZCASSERT_BASE( ((!(x) && !(y)) || [(x) isEqualToString:(y)]), @"**** Strings Unexpectedly Unequal **** \nLeft: \"%@\"\nRight: \"%@\"", (x), (y) ) \
     } while(0)
 
 /**
@@ -327,7 +327,7 @@
 
 #define RZASSERT_NONEMPTY_STRING(string) \
     do { \
-        RZASSERT_BASE( ((string) != nil && [(string) isKindOfClass:[NSString class]] && [(string) length] > 0), @"**** Unexpected Nil, Wrong Class, or Empty String **** \nReason: Expected non-empty string but got: \"%@\" \nSelf: \"%@\"", string, self ) \
+        RZASSERT_BASE( ((string) != nil && [(string) isKindOfClass:[NSString class]] && [(string) length] > 0), @"**** Unexpected Nil, Wrong Class, or Empty String **** \nReason: Expected non-empty string but got: \"%@\" \nSelf: \"%@\"", (string), self ) \
     } while(0)
 
 #define RZCASSERT_NONEMPTY_STRING(string) \
@@ -346,12 +346,12 @@
 
 #define RZASSERT_KINDOF(object, TestClass) \
     do { \
-        RZASSERT_BASE( ([(object) isKindOfClass:[TestClass class]]), @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), object, NSStringFromClass([object class]) ) \
+        RZASSERT_BASE( ([(object) isKindOfClass:[TestClass class]]), @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), (object), NSStringFromClass([(object) class]) ) \
     } while(0)
 
 #define RZCASSERT_KINDOF(object, TestClass) \
     do { \
-        RZCASSERT_BASE( ([(object) isKindOfClass:[TestClass class]]), @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), object, NSStringFromClass([object class]) ) \
+        RZCASSERT_BASE( ([(object) isKindOfClass:[TestClass class]]), @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), (object), NSStringFromClass([(object) class]) ) \
     } while(0)
 
 /**
@@ -363,12 +363,12 @@
 
 #define RZASSERT_KINDOF_OR_NIL(object, TestClass) \
     do { \
-        RZASSERT_BASE( ([(object) isKindOfClass:[TestClass class]] || (object) == nil), @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), object, NSStringFromClass([object class]) ) \
+        RZASSERT_BASE( ([(object) isKindOfClass:[TestClass class]] || (object) == nil), @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), (object), NSStringFromClass([(object) class]) ) \
     } while(0)
 
 #define RZCASSERT_KINDOF_OR_NIL(object, TestClass) \
     do { \
-        RZCASSERT_BASE( ([(object) isKindOfClass:[TestClass class]] || (object) == nil), @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), object, NSStringFromClass([object class]) ) \
+        RZCASSERT_BASE( ([(object) isKindOfClass:[TestClass class]] || (object) == nil), @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), (object), NSStringFromClass([(object) class]) ) \
     } while(0)
 
 /**
@@ -380,12 +380,12 @@
 
 #define RZASSERT_CONFORMS_PROTOCOL(object, protocol) \
     do { \
-        RZASSERT_BASE( ([(object) conformsToProtocol:protocol]), @"**** Object Unexpectedly Doesn't Conform to Protocol **** \nReason: Expected object: \"%@\" of class \"%@\" to conform to protocol \"%@\", but it does not.", object, NSStringFromClass([object class]), NSStringFromProtocol(protocol) ) \
+        RZASSERT_BASE( ([(object) conformsToProtocol:protocol]), @"**** Object Unexpectedly Doesn't Conform to Protocol **** \nReason: Expected object: \"%@\" of class \"%@\" to conform to protocol \"%@\", but it does not.", (object), NSStringFromClass([(object) class]), NSStringFromProtocol(protocol) ) \
     } while(0)
 
 #define RZCASSERT_CONFORMS_PROTOCOL(object, protocol) \
     do { \
-        RZCASSERT_BASE( ([(object) conformsToProtocol:protocol]), @"**** Object Unexpectedly Doesn't Conform to Protocol **** \nReason: Expected object: \"%@\" of class \"%@\" to conform to protocol \"%@\", but it does not.", object, NSStringFromClass([object class]), NSStringFromProtocol(protocol) ) \
+        RZCASSERT_BASE( ([(object) conformsToProtocol:protocol]), @"**** Object Unexpectedly Doesn't Conform to Protocol **** \nReason: Expected object: \"%@\" of class \"%@\" to conform to protocol \"%@\", but it does not.", (object), NSStringFromClass([(object) class]), NSStringFromProtocol(protocol) ) \
     } while(0)
 
 /**
@@ -397,12 +397,12 @@
 
 #define RZASSERT_CLASS_SUBCLASS_OF_CLASS(Subclass, Superclass) \
     do { \
-        RZASSERT_BASE( ([([Subclass class]) isSubclassOfClass:([Superclass class])]), @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", [Subclass class], [Superclass class] ) \
+        RZASSERT_BASE( ([[Subclass class] isSubclassOfClass:[Superclass class]]), @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", [Subclass class], [Superclass class] ) \
     } while(0)
 
 #define RZCASSERT_CLASS_SUBCLASS_OF_CLASS(Subclass, Superclass) \
     do { \
-        RZCASSERT_BASE( ([([Subclass class]) isSubclassOfClass:([Superclass class])]), @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", [Subclass class], [Superclass class] ) \
+        RZCASSERT_BASE( ([[Subclass class] isSubclassOfClass:[Superclass class]]), @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", [Subclass class], [Superclass class] ) \
     } while(0)
 
 // Overrides
