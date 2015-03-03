@@ -397,12 +397,12 @@
 
 #define RZASSERT_CLASS_SUBCLASS_OF_CLASS(Subclass, Superclass) \
     do { \
-        RZASSERT_BASE( ([(Subclass) isSubclassOfClass:(Superclass)]), @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", Subclass, Superclass ) \
+        RZASSERT_BASE( ([([Subclass class]) isSubclassOfClass:([Superclass class])]), @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", [Subclass class], [Superclass class] ) \
     } while(0)
 
 #define RZCASSERT_CLASS_SUBCLASS_OF_CLASS(Subclass, Superclass) \
     do { \
-        RZCASSERT_BASE( ([(Subclass) isSubclassOfClass:(Superclass)]), @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", Subclass, Superclass ) \
+        RZCASSERT_BASE( ([([Subclass class]) isSubclassOfClass:([Superclass class])]), @"**** Bad Subclass Relationship **** \nReason: Expected class: \"%@\" to be a subclass of class: \"%@\", but it is not.", [Subclass class], [Superclass class] ) \
     } while(0)
 
 // Overrides
