@@ -346,12 +346,12 @@
 
 #define RZASSERT_KINDOF(object, TestClass) \
     do { \
-        RZASSERT_BASE( ([(object) isKindOfClass:[TestClass class]]), @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(TestClass), object, NSStringFromClass([object class]) ) \
+        RZASSERT_BASE( ([(object) isKindOfClass:[TestClass class]]), @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), object, NSStringFromClass([object class]) ) \
     } while(0)
 
 #define RZCASSERT_KINDOF(object, TestClass) \
     do { \
-        RZCASSERT_BASE( ([(object) isKindOfClass:[TestClass class]]), @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass(TestClass), object, NSStringFromClass([object class]) ) \
+        RZCASSERT_BASE( ([(object) isKindOfClass:[TestClass class]]), @"**** Object of Unexpected Class **** \nReason: Expected class: \"%@\" but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), object, NSStringFromClass([object class]) ) \
     } while(0)
 
 /**
@@ -363,12 +363,12 @@
 
 #define RZASSERT_KINDOF_OR_NIL(object, TestClass) \
     do { \
-        RZASSERT_BASE( ([(object) isKindOfClass:[TestClass class]] || (object) == nil), @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass(TestClass), object, NSStringFromClass([object class]) ) \
+        RZASSERT_BASE( ([(object) isKindOfClass:[TestClass class]] || (object) == nil), @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), object, NSStringFromClass([object class]) ) \
     } while(0)
 
 #define RZCASSERT_KINDOF_OR_NIL(object, TestClass) \
     do { \
-        RZCASSERT_BASE( ([(object) isKindOfClass:[TestClass class]] || (object) == nil), @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass(TestClass), object, NSStringFromClass([object class]) ) \
+        RZCASSERT_BASE( ([(object) isKindOfClass:[TestClass class]] || (object) == nil), @"**** Object of Unexpected Class and Not Nil **** \nReason: Expected class: \"%@\" or nil but got: \"%@\" of class \"%@\"", NSStringFromClass([TestClass class]), object, NSStringFromClass([object class]) ) \
     } while(0)
 
 /**
