@@ -87,7 +87,7 @@ This is to avoid the compiler complaining that `foo` is unused when you compile 
 There are many cases where you might like to specify the assertion failure message in more detail (for example, this can be very useful when running in production with custom logging, as described above). Most of RZAssert's macros allow you to specify a custom message by using the _WITH_MESSAGE format:
 
 ```objc
-	RZ_ASSERT_TRUE_WITH_MESSAGE( foo != nil, @"foo is nil!");
+RZ_ASSERT_TRUE_WITH_MESSAGE(foo != nil, @"foo is nil!");
 ``` 
 
 
