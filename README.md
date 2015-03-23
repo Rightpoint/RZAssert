@@ -70,15 +70,6 @@ RZAssert fixes this by providing a facility to run custom logging code in produc
 
 Once you have configured a logging handler block, if the code is compiled with assertions disabled, all your calls to the RZAssert macros will automatically log to your own logging handler instead. This is great to use with a breadcrumb system, so you can get clues about what happened that may have led to a later crash.
 
-## Custom Assertion Messages
-
-There are many cases where you might like to specify the assertion failure message in more detail (for example, this can be very useful when running in production with custom logging, as described above). Most of RZAssert's macros allow you to specify a custom message by using the _WITH_MESSAGE format:
-
-```objc
-	RZ_ASSERT_TRUE_WITH_MESSAGE( foo != nil, @"foo is nil!");
-``` 
-
-
 ### Warning About `NS_BLOCK_ASSERTIONS`
 You may have some code like this:
 
@@ -90,6 +81,15 @@ You may have some code like this:
 ```
 
 This is to avoid the compiler complaining that `foo` is unused when you compile with assertions disabled. However, if you want your RZAssert calls to be turned into logs in release builds, don’t wrap any assertions in checks for `NS_BLOCK_ASSERTIONS`, because you always want them to run. Save `NS_BLOCK_ASSERTIONS` checks for expensive tests that you really only want to run at debug time.
+
+## Custom Assertion Messages
+
+There are many cases where you might like to specify the assertion failure message in more detail (for example, this can be very useful when running in production with custom logging, as described above). Most of RZAssert's macros allow you to specify a custom message by using the _WITH_MESSAGE format:
+
+```objc
+	RZ_ASSERT_TRUE_WITH_MESSAGE( foo != nil, @"foo is nil!");
+``` 
+
 
 ## Usage
 
