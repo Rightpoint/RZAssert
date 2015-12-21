@@ -84,7 +84,7 @@ This is to avoid the compiler complaining that `foo` is unused when you compile 
 
 ## Usage
 
-To run the example project, type `pod try rzassert` and then run the example project. There are two different behaviors of assertions:
+To run the example project, type `pod try RZAssert` and then run the example project. There are two different behaviors of assertions:
 
 1. Throw an exception (and therefore crash) on assert.
 1. Log the assertion with the logger of your choice, and don’t crash.
