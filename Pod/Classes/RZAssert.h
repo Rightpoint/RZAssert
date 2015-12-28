@@ -66,7 +66,7 @@
     do { \
         if ( [RZAssert hasLogger] ) { \
             if ( !(test) ) { \
-                [RZAssert logMessage:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
+                [RZAssert logMessage:[NSString stringWithFormat:@"**** Assertion failure in %@, %@:%d\n%@", @"" __PRETTY_FUNCTION__, @"" __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
             } \
         } \
     } while(0);
@@ -83,7 +83,7 @@
     do { \
         if ( [RZAssert hasLogger] ) { \
             if ( !(test) ) { \
-                [RZAssert logMessage:[NSString stringWithFormat:@"**** Assertion failure in %s, %s:%d\n%@", __PRETTY_FUNCTION__, __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
+                [RZAssert logMessage:[NSString stringWithFormat:@"**** Assertion failure in %@, %@:%d\n%@", @"" __PRETTY_FUNCTION__, @"" __FILE__, __LINE__, ([NSString stringWithFormat:format, ##__VA_ARGS__])]]; \
             } \
         } \
     } while(0);
