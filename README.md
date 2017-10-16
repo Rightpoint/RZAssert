@@ -1,7 +1,7 @@
 RZAssert
 ============
 
-[![Build Status](https://travis-ci.org/Raizlabs/RZAssert.svg)](https://travis-ci.org/Raizlabs/RZAssert)
+[![Build Status](https://travis-ci.org/Raizlabs/RZAssert.svg?branch=master)](https://travis-ci.org/Raizlabs/RZAssert)
 
 RZAssert adds ease of implementation and clarity of intent to your assertions. RZAssert defines macros which—like comments—express intent, but they never go out of date because they are checked by the compiler. `RZ_ASSERT_TRUE`, `RZ_ASSERT_FALSE`, `RZASSERT_NOT_NIL`, and `RZASSERT_NONEMPTY_STRING` all do exactly what you think they do, and they pass helpful messages along to `NSAssert`.
 
