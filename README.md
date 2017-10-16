@@ -24,8 +24,8 @@ RZAssert also includes more exciting assertions that come in handy in a variety 
 
     ```objc
     typedef NS_ENUM(NSInteger, RZAwesomeMode) {
-        INVAwesomeModeNotSet = 0,
-        INVAwesomeModeIsAwesome
+        ABCAwesomeModeNotSet = 0,
+        ABCAwesomeModeIsAwesome
     };
 
     @implementation RZMyClass
@@ -33,11 +33,11 @@ RZAssert also includes more exciting assertions that come in handy in a variety 
     - (void)configureThingsForAwesomeMode:(RZAwesomeMode)awesomeMode
     {
           switch ( awesomeMode ) {
-                case INVAwesomeModeNotSet: {
+                case ABCAwesomeModeNotSet: {
                     RZASSERT_SHOULD_NEVER_GET_HERE;
                     break;
                 }
-                case INVAwesomeModeIsAwesome: {
+                case ABCAwesomeModeIsAwesome: {
                     [self doAwesomeStuff];
                     break;
                 }
