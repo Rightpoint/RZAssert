@@ -32,18 +32,12 @@ namespace :install do
   task :tools do
     # don't care if this fails on travis
     sh("brew update") rescue nil
-    sh("gem install cocoapods --no-rdoc --no-ri --no-document --quiet") rescue nil
-  end
-
-  task :pods do
-    sh("cd Example && pod update && pod install && cd ../")
   end
   
 end
 
 task :install do
   Rake::Task['install:tools'].invoke
-  Rake::Task['install:pods'].invoke
 end
 
 #
@@ -72,12 +66,6 @@ end
 
 namespace :clean do
   
-  task :pods do
-    sh("rm -f Example/Podfile.lock")
-    sh "rm -rf Example/Pods"
-    sh("rm -rf Example/*.xcworkspace")
-  end
-  
   task :example do
     sh("xcodebuild -project '#{PROJ_PATH}' -scheme '#{TEST_SCHEME}' -sdk iphonesimulator clean") rescue nil
   end
@@ -85,10 +73,8 @@ namespace :clean do
 end
 
 task :clean do
-  Rake::Task['clean:pods'].invoke
   Rake::Task['clean:example'].invoke
 end
-
 
 #
 # Utils
@@ -96,13 +82,11 @@ end
 
 task :usage do
   puts "Usage:"
-  puts "  rake install       -- install all dependencies (cocoapods)"
-  puts "  rake install:pods  -- install cocoapods for tests/example"
+  puts "  rake install       -- install all dependencies"
   puts "  rake install:tools -- install build tool dependencies"
   puts "  rake test          -- run unit tests"
   puts "  rake clean         -- clean everything"
   puts "  rake clean:example -- clean the example project build artifacts"
-  puts "  rake clean:pods    -- clean up cocoapods artifacts"
   puts "  rake usage         -- print this message"
 end
 
